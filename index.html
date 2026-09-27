@@ -3,19 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+
   <title>Sushic Italy</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: #f7f7f5;
+      color: #111;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 70px 24px 40px;
+      text-align: center;
+    }
+
+    .brand {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: 7px;
+      margin-bottom: 8px;
+    }
+
+    .italy {
+      font-size: 12px;
+      letter-spacing: 5px;
+      color: #777;
+      margin-bottom: 60px;
+    }
+
+    h1 {
+      font-size: 23px;
+      margin: 0 0 8px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .restaurant {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 22px 22px;
+      margin-bottom: 15px;
+
+      background: #ffffff;
+      color: #111111;
+      text-decoration: none;
+
+      border: 1px solid #e7e7e7;
+      border-radius: 16px;
+
+      font-size: 17px;
+      font-weight: 600;
+
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .restaurant:active {
+      transform: scale(0.98);
+    }
+
+    .arrow {
+      font-size: 22px;
+      color: #999;
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 12px;
+      color: #aaa;
+    }
+  </style>
 </head>
 
 <body>
 
-  <h1>SUSHIC</h1>
-  <p>Scegli il ristorante</p>
+  <main class="page">
 
-  <a href="#">Sushic Biella</a>
+    <div class="brand">SUSHIC</div>
+    <div class="italy">ITALY</div>
 
-  <br><br>
+    <h1>Scegli il ristorante</h1>
+    <div class="subtitle">Seleziona la sede</div>
 
-  <a href="#">Sushic Cassano</a>
+    <a class="restaurant" href="#">
+      <span>Sushic Biella</span>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="restaurant" href="#">
+      <span>Sushic Cassano</span>
+      <span class="arrow">›</span>
+    </a>
+
+    <footer>
+      © Sushic Italy
+    </footer>
+
+  </main>
 
 </body>
 </html>
