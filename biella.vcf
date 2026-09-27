@@ -2,9 +2,10 @@ BEGIN:VCARD
 VERSION:3.0
 N:Biella;Sushic;;;
 FN:Sushic Biella
-ORG:Sushic Biella
-TEL;TYPE=WORK,VOICE:+390153351624
-EMAIL;TYPE=WORK:sushicbiella.delivery@gmail.com
+ORG:Sushic
+TEL;TYPE=CELL:+390153351624
+EMAIL;TYPE=INTERNET:sushicbiella.delivery@gmail.com
 URL:https://www.sushic.it
 ADR;TYPE=WORK:;;Viale Macallè\, 9;Biella;BI;13900;Italia
+PHOTO;VALUE=URI:https://wenrisorseumane-afk.github.io/Sushic-Menu/contact-logo.png
 END:VCARD
