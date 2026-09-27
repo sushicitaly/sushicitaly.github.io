@@ -1,7 +1,8 @@
 BEGIN:VCARD
 VERSION:3.0
-FN:SUSHIC Biella
-ORG:SUSHIC
+N:Biella;Sushic;;;
+FN:Sushic Biella
+ORG:Sushic Biella
 TEL;TYPE=WORK,VOICE:+390153351624
 EMAIL;TYPE=WORK:sushicbiella.delivery@gmail.com
 URL:https://www.sushic.it
