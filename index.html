@@ -28,11 +28,19 @@
       text-align: center;
     }
 
-    .brand {
-      font-size: 42px;
-      font-weight: 700;
-      letter-spacing: 7px;
-      margin-bottom: 8px;
+   .logo-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.logo {
+  display: block;
+  width: 210px;
+  max-width: 70%;
+  height: auto;
+}
     }
 
     .italy {
@@ -96,8 +104,10 @@
 
   <main class="page">
 
-    <div class="brand">SUSHIC</div>
-    <div class="italy">ITALY</div>
+   <div class="logo-wrap">
+  <img src="sushic-logo.png" alt="Sushic Asian Experience" class="logo">
+</div>
+<div class="italy">ITALY</div>
 
     <h1>Scegli il ristorante</h1>
     <div class="subtitle">Seleziona la sede</div>
