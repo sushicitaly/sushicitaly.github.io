@@ -8,8 +8,8 @@
   <title>Sushic Italy</title>
 
   <link rel="icon" href="/favicon.ico?v=2" sizes="any">
-  <link rel="icon" type="image/png" href="/contact-logo.png.png?v=2">
-  <link rel="apple-touch-icon" href="/contact-logo.png.png?v=2">
+  <link rel="icon" type="image/png" href="/contact-logo.png?v=2">
+  <link rel="apple-touch-icon" href="/contact-logo.png?v=2">
 
   <style>
     * {
@@ -25,11 +25,55 @@
     }
 
     .page {
+      position: relative;
       width: 100%;
       max-width: 500px;
       margin: 0 auto;
       padding: 70px 24px 40px;
       text-align: center;
+    }
+
+    /* 语言切换 */
+
+    .language-switcher {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      padding: 4px;
+
+      background: #ffffff;
+      border: 1px solid #e7e7e7;
+      border-radius: 10px;
+
+      box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+    }
+
+    .language-button {
+      border: 0;
+      background: transparent;
+
+      padding: 6px 8px;
+
+      border-radius: 7px;
+
+      font-size: 12px;
+      font-weight: 600;
+
+      color: #888;
+
+      cursor: pointer;
+
+      font-family: inherit;
+    }
+
+    .language-button.active {
+      background: #111;
+      color: #fff;
     }
 
     .logo-wrap {
@@ -64,11 +108,13 @@
       justify-content: space-between;
 
       width: 100%;
+
       padding: 27px 24px;
       margin-bottom: 18px;
 
       background: #ffffff;
       color: #111111;
+
       text-decoration: none;
 
       border: 1px solid #e7e7e7;
@@ -101,6 +147,34 @@
 
   <main class="page">
 
+    <!-- 语言切换 -->
+
+    <div class="language-switcher">
+      <button
+        class="language-button"
+        id="lang-it"
+        onclick="setLanguage('it')">
+        IT
+      </button>
+
+      <button
+        class="language-button"
+        id="lang-en"
+        onclick="setLanguage('en')">
+        EN
+      </button>
+
+      <button
+        class="language-button"
+        id="lang-zh"
+        onclick="setLanguage('zh')">
+        中文
+      </button>
+    </div>
+
+
+    <!-- LOGO -->
+
     <div class="logo-wrap">
       <img
         src="sushic-logo.png"
@@ -108,24 +182,196 @@
         class="logo">
     </div>
 
-    <h1>Scegli il ristorante</h1>
-    <div class="subtitle">Seleziona la sede</div>
 
-    <a class="restaurant" href="biella.html">
+    <h1 id="pageTitle">
+      Scegli il ristorante
+    </h1>
+
+    <div
+      class="subtitle"
+      id="pageSubtitle">
+      Seleziona la sede
+    </div>
+
+
+    <!-- BIELLA -->
+
+    <a
+      class="restaurant"
+      href="biella.html">
+
       <span>Sushic Biella</span>
-      <span class="arrow">›</span>
+
+      <span class="arrow">
+        ›
+      </span>
+
     </a>
 
-    <a class="restaurant" href="cassano.html">
+
+    <!-- CASSANO -->
+
+    <a
+      class="restaurant"
+      href="cassano.html">
+
       <span>Sushic Cassano</span>
-      <span class="arrow">›</span>
+
+      <span class="arrow">
+        ›
+      </span>
+
     </a>
+
 
     <footer>
       © Sushic Italy
     </footer>
 
   </main>
+
+
+  <script>
+
+    const translations = {
+
+      it: {
+        title: "Scegli il ristorante",
+        subtitle: "Seleziona la sede"
+      },
+
+      en: {
+        title: "Choose a restaurant",
+        subtitle: "Select a location"
+      },
+
+      zh: {
+        title: "选择餐厅",
+        subtitle: "请选择门店"
+      }
+
+    };
+
+
+    /*
+      自动检测手机语言
+    */
+
+    function detectLanguage() {
+
+      const browserLanguage =
+        (navigator.languages && navigator.languages[0]) ||
+        navigator.language ||
+        "it";
+
+      const language =
+        browserLanguage.toLowerCase();
+
+
+      if (language.startsWith("zh")) {
+        return "zh";
+      }
+
+      if (language.startsWith("en")) {
+        return "en";
+      }
+
+      if (language.startsWith("it")) {
+        return "it";
+      }
+
+      /* 其他语言默认意大利语 */
+
+      return "it";
+    }
+
+
+    /*
+      切换语言
+    */
+
+    function applyLanguage(language) {
+
+      const text =
+        translations[language];
+
+
+      document
+        .getElementById("pageTitle")
+        .textContent =
+        text.title;
+
+
+      document
+        .getElementById("pageSubtitle")
+        .textContent =
+        text.subtitle;
+
+
+      /*
+        更新 HTML language
+      */
+
+      document.documentElement.lang =
+        language === "zh"
+        ? "zh-CN"
+        : language;
+
+
+      /*
+        更新按钮状态
+      */
+
+      document
+        .querySelectorAll(".language-button")
+        .forEach(function(button) {
+
+          button.classList.remove("active");
+
+        });
+
+
+      document
+        .getElementById("lang-" + language)
+        .classList.add("active");
+    }
+
+
+    /*
+      用户手动选择语言
+    */
+
+    function setLanguage(language) {
+
+      localStorage.setItem(
+        "sushic-language",
+        language
+      );
+
+      applyLanguage(language);
+    }
+
+
+    /*
+      页面打开时：
+      1. 优先读取用户之前手动选择的语言
+      2. 如果没有，则自动检测手机语言
+    */
+
+    const savedLanguage =
+      localStorage.getItem(
+        "sushic-language"
+      );
+
+
+    const initialLanguage =
+      savedLanguage ||
+      detectLanguage();
+
+
+    applyLanguage(initialLanguage);
+
+  </script>
 
 </body>
 </html>
