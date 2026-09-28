@@ -54,7 +54,6 @@
       border-radius: 10px;
 
       color: #333;
-
       font-family: inherit;
       font-size: 13px;
       font-weight: 600;
@@ -245,7 +244,7 @@
     }
 
     /* =========================
-       按钮
+       功能按钮
        ========================= */
 
     .button {
@@ -371,9 +370,7 @@
       aria-label="Select language">
 
       <span class="current-flag" id="currentFlag">🇮🇹</span>
-
       <span id="currentLanguage">IT</span>
-
       <span class="language-arrow">▼</span>
 
     </button>
@@ -431,7 +428,7 @@
 
 
   <!-- =========================
-       LOGO + 营业状态
+       LOGO + 门店 + 营业状态
        ========================= -->
 
   <div class="header">
@@ -449,8 +446,6 @@
       BIELLA
     </div>
 
-
-    <!-- 自动营业状态 -->
 
     <div class="business-hours">
 
@@ -632,7 +627,7 @@
 <script>
 
   /* =========================
-     三语言文字
+     三语言
      ========================= */
 
   const translations = {
@@ -651,6 +646,9 @@
 
       closedUntil:
         "Chiuso · Apre alle ",
+
+      closedToday:
+        "Chiuso · Apre oggi alle 12:00",
 
       closedTomorrow:
         "Chiuso · Apre domani alle 12:00",
@@ -691,6 +689,9 @@
       closedUntil:
         "Closed · Opens at ",
 
+      closedToday:
+        "Closed · Opens today at 12:00",
+
       closedTomorrow:
         "Closed · Opens tomorrow at 12:00",
 
@@ -729,6 +730,9 @@
 
       closedUntil:
         "休息中 · 营业时间 ",
+
+      closedToday:
+        "休息中 · 今天 12:00 营业",
 
       closedTomorrow:
         "已打烊 · 明天 12:00 营业",
@@ -895,7 +899,7 @@
 
 
   /* =========================
-     点击外部关闭语言菜单
+     点击其他地方关闭语言菜单
      ========================= */
 
   document.addEventListener(
@@ -977,7 +981,7 @@
 
 
   /* =========================
-     自动判断营业状态
+     自动营业状态
 
      每天：
      12:00–15:00
@@ -1028,7 +1032,20 @@
     );
 
 
-    /* ---------- 午餐营业 ---------- */
+    /* ---------- 00:00–12:00 ---------- */
+
+    if (minutes < lunchOpen) {
+
+      status.classList.add("closed");
+
+      statusText.textContent =
+        text.closedToday;
+
+      return;
+    }
+
+
+    /* ---------- 12:00–15:00 ---------- */
 
     if (
       minutes >= lunchOpen &&
@@ -1044,7 +1061,7 @@
     }
 
 
-    /* ---------- 下午休息 ---------- */
+    /* ---------- 15:00–19:00 ---------- */
 
     if (
       minutes >= lunchClose &&
@@ -1060,7 +1077,7 @@
     }
 
 
-    /* ---------- 晚餐营业 ---------- */
+    /* ---------- 19:00–23:30 ---------- */
 
     if (
       minutes >= dinnerOpen &&
@@ -1076,7 +1093,7 @@
     }
 
 
-    /* ---------- 晚间打烊至第二天 ---------- */
+    /* ---------- 23:30–24:00 ---------- */
 
     status.classList.add("closed");
 
@@ -1103,7 +1120,7 @@
   updateBusinessStatus();
 
 
-  /* 每分钟自动刷新营业状态 */
+  /* 每分钟自动重新判断一次 */
 
   setInterval(
     updateBusinessStatus,
