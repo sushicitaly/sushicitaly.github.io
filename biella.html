@@ -12,6 +12,16 @@
       box-sizing: border-box;
     }
 
+    <script>
+function showContactHelp() {
+  if (/Android/i.test(navigator.userAgent)) {
+    setTimeout(function () {
+      alert("Contatto scaricato.\nApri il file scaricato per aggiungere SUSHIC Biella ai contatti.");
+    }, 500);
+  }
+}
+</script>
+  
     body {
       margin: 0;
       min-height: 100vh;
@@ -160,7 +170,7 @@
     <div class="arrow">›</div>
   </a>
 
-  <a class="button" href="biella.vcf">
+ <a class="button" href="biella.vcf" download onclick="showContactHelp()">
     <div class="icon">👤</div>
     <div class="text">
       <div class="title">Salva contatto</div>
