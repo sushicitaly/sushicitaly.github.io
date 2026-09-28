@@ -21,19 +21,152 @@
     }
 
     .page {
+      position: relative;
       width: 100%;
       max-width: 500px;
       margin: 0 auto;
       padding: 30px 24px 50px;
     }
 
+    /* =========================
+       语言下拉菜单
+       ========================= */
+
+    .language-menu {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      z-index: 1000;
+      text-align: left;
+    }
+
+    .language-current {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      min-width: 82px;
+      padding: 8px 10px;
+
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+
+      color: #333;
+
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+    }
+
+    .language-current:active {
+      transform: scale(0.98);
+    }
+
+    .current-flag {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .language-arrow {
+      margin-left: 1px;
+      color: #999;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .language-menu.open .language-arrow {
+      transform: rotate(180deg);
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 7px);
+      right: 0;
+
+      width: 105px;
+      padding: 6px;
+
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+
+      box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-5px);
+
+      transition:
+        opacity 0.18s ease,
+        transform 0.18s ease,
+        visibility 0.18s ease;
+    }
+
+    .language-menu.open .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      width: 100%;
+      padding: 10px 9px;
+
+      border: 0;
+      border-radius: 8px;
+
+      background: transparent;
+      color: #333;
+
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .language-option:hover {
+      background: #f5f5f3;
+    }
+
+    .language-option.active {
+      background: #f2f2f0;
+      font-weight: 600;
+    }
+
+    .language-option .flag {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    /* =========================
+       返回
+       ========================= */
+
     .back {
       display: inline-block;
       margin-bottom: 45px;
+      padding-top: 5px;
+
       color: #777;
       text-decoration: none;
       font-size: 15px;
     }
+
+    /* =========================
+       LOGO
+       ========================= */
 
     .header {
       text-align: center;
@@ -59,6 +192,10 @@
       letter-spacing: 4px;
       color: #888;
     }
+
+    /* =========================
+       按钮
+       ========================= */
 
     .button {
       display: flex;
@@ -115,7 +252,10 @@
       font-size: 12px;
     }
 
-    /* Android 联系人下载提示 */
+    /* =========================
+       Android 联系人下载提示
+       ========================= */
+
     .contact-toast {
       position: fixed;
       top: 20px;
@@ -164,80 +304,518 @@
 
 <main class="page">
 
-  <a class="back" href="index.html">‹ Scegli un altro ristorante</a>
+  <!-- 语言选择 -->
 
-  <div class="header">
-    <div class="logo-wrap">
-      <img src="sushic-logo.png" alt="Sushic Asian Experience" class="logo">
+  <div class="language-menu" id="languageMenu">
+
+    <button
+      class="language-current"
+      type="button"
+      onclick="toggleLanguageMenu(event)"
+      aria-label="Select language">
+
+      <span class="current-flag" id="currentFlag">🇮🇹</span>
+      <span id="currentLanguage">IT</span>
+      <span class="language-arrow">▼</span>
+
+    </button>
+
+    <div class="language-dropdown">
+
+      <button
+        class="language-option"
+        id="option-it"
+        type="button"
+        onclick="setLanguage('it')">
+
+        <span class="flag">🇮🇹</span>
+        <span>IT</span>
+
+      </button>
+
+      <button
+        class="language-option"
+        id="option-en"
+        type="button"
+        onclick="setLanguage('en')">
+
+        <span class="flag">🇬🇧</span>
+        <span>EN</span>
+
+      </button>
+
+      <button
+        class="language-option"
+        id="option-zh"
+        type="button"
+        onclick="setLanguage('zh')">
+
+        <span class="flag">🇨🇳</span>
+        <span>中文</span>
+
+      </button>
+
     </div>
-    <div class="location">CASSANO</div>
+
   </div>
 
+
+  <!-- 返回首页 -->
+
+  <a
+    class="back"
+    href="index.html"
+    id="backText">
+    ‹ Scegli un altro ristorante
+  </a>
+
+
+  <!-- LOGO -->
+
+  <div class="header">
+
+    <div class="logo-wrap">
+      <img
+        src="sushic-logo.png"
+        alt="Sushic Asian Experience"
+        class="logo">
+    </div>
+
+    <div class="location">
+      CASSANO
+    </div>
+
+  </div>
+
+
+  <!-- MENU -->
+
   <a class="button" href="menu-cassano.html">
+
     <div class="icon">🍣</div>
+
     <div class="text">
-      <div class="title">Menu</div>
-      <div class="description">Consulta i nostri menu</div>
+
+      <div
+        class="title"
+        id="menuTitle">
+        Menu
+      </div>
+
+      <div
+        class="description"
+        id="menuDescription">
+        Consulta i nostri menu
+      </div>
+
     </div>
+
     <div class="arrow">›</div>
+
   </a>
 
-  <a class="button"
-     href="https://maps.app.goo.gl/hta9JxhNLxUsiPXn6?g_st=ic"
-     target="_blank"
-     rel="noopener">
+
+  <!-- NAVIGAZIONE -->
+
+  <a
+    class="button"
+    href="https://maps.app.goo.gl/hta9JxhNLxUsiPXn6?g_st=ic"
+    target="_blank"
+    rel="noopener">
+
     <div class="icon">📍</div>
+
     <div class="text">
-      <div class="title">Naviga</div>
-      <div class="description">Indicazioni per il ristorante</div>
+
+      <div
+        class="title"
+        id="navigateTitle">
+        Naviga
+      </div>
+
+      <div
+        class="description"
+        id="navigateDescription">
+        Indicazioni per il ristorante
+      </div>
+
     </div>
+
     <div class="arrow">›</div>
+
   </a>
 
-  <a class="button" href="tel:+390331648325">
+
+  <!-- TELEFONO -->
+
+  <a
+    class="button"
+    href="tel:+390331648325">
+
     <div class="icon">☎️</div>
+
     <div class="text">
-      <div class="title">Chiama</div>
-      <div class="description">Contatta il ristorante</div>
+
+      <div
+        class="title"
+        id="callTitle">
+        Chiama
+      </div>
+
+      <div
+        class="description"
+        id="callDescription">
+        Contatta il ristorante
+      </div>
+
     </div>
+
     <div class="arrow">›</div>
+
   </a>
 
-  <a class="button"
-     href="cassano.vcf"
-     download
-     onclick="showContactHelp()">
+
+  <!-- SALVA CONTATTO -->
+
+  <a
+    class="button"
+    href="cassano.vcf"
+    download
+    onclick="showContactHelp()">
+
     <div class="icon">👤</div>
+
     <div class="text">
-      <div class="title">Salva contatto</div>
-      <div class="description">Aggiungi Sushic Cassano ai contatti</div>
+
+      <div
+        class="title"
+        id="contactTitle">
+        Salva contatto
+      </div>
+
+      <div
+        class="description"
+        id="contactDescription">
+        Aggiungi Sushic Cassano ai contatti
+      </div>
+
     </div>
+
     <div class="arrow">›</div>
+
   </a>
 
-  <footer>© Sushic Italy</footer>
+
+  <footer>
+    © Sushic Italy
+  </footer>
 
 </main>
 
+
 <!-- Android 顶部提示 -->
-<div id="contactToast" class="contact-toast">
-  <strong>✓ Contatto scaricato</strong>
-  Apri il file scaricato per salvarlo nei contatti.
+
+<div
+  id="contactToast"
+  class="contact-toast">
+
+  <strong id="toastTitle">
+    ✓ Contatto scaricato
+  </strong>
+
+  <span id="toastDescription">
+    Apri il file scaricato per salvarlo nei contatti.
+  </span>
+
 </div>
 
+
 <script>
-function showContactHelp() {
-  if (/Android/i.test(navigator.userAgent)) {
 
-    const toast = document.getElementById("contactToast");
+  /* =========================
+     三语言文字
+     ========================= */
 
-    toast.classList.add("show");
+  const translations = {
 
-    setTimeout(function () {
-      toast.classList.remove("show");
-    }, 6000);
+    it: {
+      back: "‹ Scegli un altro ristorante",
+
+      menuTitle: "Menu",
+      menuDescription: "Consulta i nostri menu",
+
+      navigateTitle: "Naviga",
+      navigateDescription: "Indicazioni per il ristorante",
+
+      callTitle: "Chiama",
+      callDescription: "Contatta il ristorante",
+
+      contactTitle: "Salva contatto",
+      contactDescription: "Aggiungi Sushic Cassano ai contatti",
+
+      toastTitle: "✓ Contatto scaricato",
+      toastDescription:
+        "Apri il file scaricato per salvarlo nei contatti.",
+
+      languageName: "IT",
+      flag: "🇮🇹"
+    },
+
+
+    en: {
+      back: "‹ Choose another restaurant",
+
+      menuTitle: "Menu",
+      menuDescription: "View our menus",
+
+      navigateTitle: "Directions",
+      navigateDescription: "Get directions to the restaurant",
+
+      callTitle: "Call",
+      callDescription: "Contact the restaurant",
+
+      contactTitle: "Save contact",
+      contactDescription: "Add Sushic Cassano to your contacts",
+
+      toastTitle: "✓ Contact downloaded",
+      toastDescription:
+        "Open the downloaded file to save it to your contacts.",
+
+      languageName: "EN",
+      flag: "🇬🇧"
+    },
+
+
+    zh: {
+      back: "‹ 选择其他餐厅",
+
+      menuTitle: "菜单",
+      menuDescription: "查看我们的菜单",
+
+      navigateTitle: "导航",
+      navigateDescription: "前往餐厅",
+
+      callTitle: "电话",
+      callDescription: "联系餐厅",
+
+      contactTitle: "保存联系人",
+      contactDescription: "将 Sushic Cassano 添加到通讯录",
+
+      toastTitle: "✓ 联系人已下载",
+      toastDescription:
+        "打开已下载的文件，将 Sushic Cassano 保存到通讯录。",
+
+      languageName: "中文",
+      flag: "🇨🇳"
+    }
+
+  };
+
+
+  /* =========================
+     自动检测系统语言
+     ========================= */
+
+  function detectLanguage() {
+
+    const browserLanguage =
+      (navigator.languages && navigator.languages[0]) ||
+      navigator.language ||
+      "it";
+
+    const language =
+      browserLanguage.toLowerCase();
+
+
+    if (language.startsWith("zh")) {
+      return "zh";
+    }
+
+    if (language.startsWith("en")) {
+      return "en";
+    }
+
+    if (language.startsWith("it")) {
+      return "it";
+    }
+
+    return "it";
   }
-}
+
+
+  /* =========================
+     打开 / 关闭语言菜单
+     ========================= */
+
+  function toggleLanguageMenu(event) {
+
+    event.stopPropagation();
+
+    document
+      .getElementById("languageMenu")
+      .classList
+      .toggle("open");
+  }
+
+
+  /* =========================
+     应用语言
+     ========================= */
+
+  function applyLanguage(language) {
+
+    const text =
+      translations[language];
+
+
+    document.getElementById("backText").textContent =
+      text.back;
+
+
+    document.getElementById("menuTitle").textContent =
+      text.menuTitle;
+
+    document.getElementById("menuDescription").textContent =
+      text.menuDescription;
+
+
+    document.getElementById("navigateTitle").textContent =
+      text.navigateTitle;
+
+    document.getElementById("navigateDescription").textContent =
+      text.navigateDescription;
+
+
+    document.getElementById("callTitle").textContent =
+      text.callTitle;
+
+    document.getElementById("callDescription").textContent =
+      text.callDescription;
+
+
+    document.getElementById("contactTitle").textContent =
+      text.contactTitle;
+
+    document.getElementById("contactDescription").textContent =
+      text.contactDescription;
+
+
+    document.getElementById("toastTitle").textContent =
+      text.toastTitle;
+
+    document.getElementById("toastDescription").textContent =
+      text.toastDescription;
+
+
+    document.getElementById("currentFlag").textContent =
+      text.flag;
+
+    document.getElementById("currentLanguage").textContent =
+      text.languageName;
+
+
+    document.documentElement.lang =
+      language === "zh"
+        ? "zh-CN"
+        : language;
+
+
+    document
+      .querySelectorAll(".language-option")
+      .forEach(function(option) {
+
+        option.classList.remove("active");
+
+      });
+
+
+    document
+      .getElementById("option-" + language)
+      .classList
+      .add("active");
+  }
+
+
+  /* =========================
+     手动切换语言
+     ========================= */
+
+  function setLanguage(language) {
+
+    localStorage.setItem(
+      "sushic-language",
+      language
+    );
+
+    applyLanguage(language);
+
+    document
+      .getElementById("languageMenu")
+      .classList
+      .remove("open");
+  }
+
+
+  /* =========================
+     点击外部关闭下拉菜单
+     ========================= */
+
+  document.addEventListener(
+    "click",
+    function(event) {
+
+      const menu =
+        document.getElementById("languageMenu");
+
+      if (!menu.contains(event.target)) {
+
+        menu.classList.remove("open");
+
+      }
+
+    }
+  );
+
+
+  /* =========================
+     Android 联系人下载提示
+     ========================= */
+
+  function showContactHelp() {
+
+    if (/Android/i.test(navigator.userAgent)) {
+
+      const toast =
+        document.getElementById("contactToast");
+
+      toast.classList.add("show");
+
+      setTimeout(function() {
+
+        toast.classList.remove("show");
+
+      }, 6000);
+    }
+  }
+
+
+  /* =========================
+     页面加载语言
+     ========================= */
+
+  const savedLanguage =
+    localStorage.getItem(
+      "sushic-language"
+    );
+
+
+  const initialLanguage =
+    savedLanguage ||
+    detectLanguage();
+
+
+  applyLanguage(initialLanguage);
+
 </script>
 
 </body>
