@@ -7,6 +7,19 @@
 
   <title>Menu | Sushic Biella</title>
 
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B30JEWQ1T8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+    gtag("config", "G-B30JEWQ1T8");
+  </script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -374,7 +387,8 @@
     class="button"
     href="https://portal.pointsme.it/flyer/#/menu-preview/194429161212477447"
     target="_blank"
-    rel="noopener">
+    rel="noopener"
+    onclick="trackMenuSelection('weekday_lunch')">
 
     <div class="icon">☀️</div>
 
@@ -407,7 +421,8 @@
     class="button"
     href="https://portal.pointsme.it/flyer/#/menu-preview/195646494530805762"
     target="_blank"
-    rel="noopener">
+    rel="noopener"
+    onclick="trackMenuSelection('holiday_lunch')">
 
     <div class="icon">🎉</div>
 
@@ -440,7 +455,8 @@
     class="button"
     href="https://portal.pointsme.it/flyer/#/menu-preview/194429161212477451"
     target="_blank"
-    rel="noopener">
+    rel="noopener"
+    onclick="trackMenuSelection('dinner')">
 
     <div class="icon">🌙</div>
 
@@ -473,7 +489,8 @@
     class="button"
     href="https://sushic.it/ordina-online/"
     target="_blank"
-    rel="noopener">
+    rel="noopener"
+    onclick="trackMenuSelection('takeaway')">
 
     <div class="icon">🥡</div>
 
@@ -604,7 +621,6 @@
     const language =
       browserLanguage.toLowerCase();
 
-
     if (language.startsWith("zh")) {
       return "zh";
     }
@@ -618,6 +634,38 @@
     }
 
     return "it";
+  }
+
+
+  /* =========================
+     当前语言
+     ========================= */
+
+  function getCurrentLanguage() {
+
+    return (
+      localStorage.getItem("sushic-language") ||
+      detectLanguage()
+    );
+  }
+
+
+  /* =========================
+     GA4 菜单选择统计
+     ========================= */
+
+  function trackMenuSelection(menuType) {
+
+    if (typeof gtag === "function") {
+
+      gtag("event", "menu_selection", {
+        restaurant: "biella",
+        menu_type: menuType,
+        language: getCurrentLanguage(),
+        page_type: "menu"
+      });
+
+    }
   }
 
 
@@ -712,10 +760,13 @@
 
 
   /* =========================
-     手动切换语言
+     手动切换语言 + GA4
      ========================= */
 
   function setLanguage(language) {
+
+    const previousLanguage =
+      getCurrentLanguage();
 
     localStorage.setItem(
       "sushic-language",
@@ -728,6 +779,21 @@
       .getElementById("languageMenu")
       .classList
       .remove("open");
+
+
+    if (
+      previousLanguage !== language &&
+      typeof gtag === "function"
+    ) {
+
+      gtag("event", "language_change", {
+        restaurant: "biella",
+        page_type: "menu",
+        language_from: previousLanguage,
+        language_to: language
+      });
+
+    }
   }
 
 
