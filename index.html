@@ -11,7 +11,34 @@
   <link rel="icon" type="image/png" href="/contact-logo.png?v=2">
   <link rel="apple-touch-icon" href="/contact-logo.png?v=2">
 
+
+  <!-- =========================
+       GOOGLE ANALYTICS 4
+       ========================= -->
+
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-B3OJEWQ1T8">
+  </script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+
+    gtag(
+      "config",
+      "G-B3OJEWQ1T8"
+    );
+  </script>
+
+
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -19,17 +46,31 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
       background: #f7f7f5;
       color: #111;
     }
 
     .page {
       position: relative;
+
       width: 100%;
       max-width: 500px;
+
       margin: 0 auto;
-      padding: 70px 24px 40px;
+
+      padding:
+        70px
+        24px
+        40px;
+
       text-align: center;
     }
 
@@ -40,55 +81,83 @@
 
     .language-menu {
       position: absolute;
+
       top: 20px;
       right: 24px;
+
       z-index: 1000;
+
       text-align: left;
     }
 
+
     .language-current {
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       gap: 7px;
 
       min-width: 82px;
-      padding: 8px 10px;
+
+      padding:
+        8px
+        10px;
 
       background: #ffffff;
 
-      border: 1px solid #e5e5e5;
+      border:
+        1px
+        solid
+        #e5e5e5;
+
       border-radius: 10px;
 
       color: #333;
 
       font-family: inherit;
+
       font-size: 13px;
       font-weight: 600;
 
       cursor: pointer;
 
-      box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+      box-shadow:
+        0
+        3px
+        12px
+        rgba(0,0,0,0.05);
     }
+
 
     .language-current:active {
       transform: scale(0.98);
     }
+
 
     .current-flag {
       font-size: 17px;
       line-height: 1;
     }
 
+
     .language-arrow {
       margin-left: 1px;
+
       color: #999;
+
       font-size: 9px;
 
-      transition: transform 0.2s ease;
+      transition:
+        transform
+        0.2s
+        ease;
     }
 
-    .language-menu.open .language-arrow {
+
+    .language-menu.open
+    .language-arrow {
       transform: rotate(180deg);
     }
 
@@ -98,7 +167,9 @@
     .language-dropdown {
       position: absolute;
 
-      top: calc(100% + 7px);
+      top:
+        calc(100% + 7px);
+
       right: 0;
 
       width: 105px;
@@ -107,42 +178,68 @@
 
       background: #ffffff;
 
-      border: 1px solid #e5e5e5;
+      border:
+        1px
+        solid
+        #e5e5e5;
+
       border-radius: 12px;
 
-      box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+      box-shadow:
+        0
+        8px
+        25px
+        rgba(0,0,0,0.10);
 
       opacity: 0;
       visibility: hidden;
 
-      transform: translateY(-5px);
+      transform:
+        translateY(-5px);
 
       transition:
-        opacity 0.18s ease,
-        transform 0.18s ease,
-        visibility 0.18s ease;
+        opacity
+        0.18s
+        ease,
+
+        transform
+        0.18s
+        ease,
+
+        visibility
+        0.18s
+        ease;
     }
 
-    .language-menu.open .language-dropdown {
+
+    .language-menu.open
+    .language-dropdown {
       opacity: 1;
+
       visibility: visible;
-      transform: translateY(0);
+
+      transform:
+        translateY(0);
     }
 
 
-    /* 下拉菜单里的语言 */
+    /* 下拉菜单语言 */
 
     .language-option {
       display: flex;
+
       align-items: center;
 
       gap: 9px;
 
       width: 100%;
 
-      padding: 10px 9px;
+      padding:
+        10px
+        9px;
 
       border: 0;
+
       border-radius: 8px;
 
       background: transparent;
@@ -150,6 +247,7 @@
       color: #333;
 
       font-family: inherit;
+
       font-size: 13px;
       font-weight: 500;
 
@@ -158,16 +256,21 @@
       cursor: pointer;
     }
 
+
     .language-option:hover {
       background: #f5f5f3;
     }
 
+
     .language-option.active {
       background: #f2f2f0;
+
       font-weight: 600;
     }
 
-    .language-option .flag {
+
+    .language-option
+    .flag {
       font-size: 18px;
       line-height: 1;
     }
@@ -179,15 +282,22 @@
 
     .logo-wrap {
       width: 100%;
+
       display: flex;
+
       justify-content: center;
+
       margin-bottom: 28px;
     }
 
+
     .logo {
       display: block;
+
       width: 210px;
+
       max-width: 70%;
+
       height: auto;
     }
 
@@ -198,13 +308,21 @@
 
     h1 {
       font-size: 23px;
-      margin: 0 0 8px;
+
+      margin:
+        0
+        0
+        8px;
+
       font-weight: 600;
     }
 
+
     .subtitle {
       color: #777;
+
       font-size: 14px;
+
       margin-bottom: 55px;
     }
 
@@ -215,34 +333,53 @@
 
     .restaurant {
       display: flex;
+
       align-items: center;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
 
       width: 100%;
 
-      padding: 27px 24px;
+      padding:
+        27px
+        24px;
+
       margin-bottom: 18px;
 
       background: #ffffff;
+
       color: #111111;
 
       text-decoration: none;
 
-      border: 1px solid #e7e7e7;
+      border:
+        1px
+        solid
+        #e7e7e7;
+
       border-radius: 16px;
 
       font-size: 17px;
+
       font-weight: 600;
 
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      box-shadow:
+        0
+        5px
+        20px
+        rgba(0,0,0,0.05);
     }
+
 
     .restaurant:active {
       transform: scale(0.98);
     }
 
+
     .arrow {
       font-size: 22px;
+
       color: #999;
     }
 
@@ -253,15 +390,19 @@
 
     footer {
       margin-top: 60px;
+
       font-size: 12px;
+
       color: #aaa;
     }
 
   </style>
+
 </head>
 
 
 <body>
+
 
 <main class="page">
 
@@ -274,7 +415,6 @@
     class="language-menu"
     id="languageMenu">
 
-    <!-- 当前语言 -->
 
     <button
       class="language-current"
@@ -299,12 +439,10 @@
     </button>
 
 
-    <!-- 下拉菜单 -->
-
     <div class="language-dropdown">
 
 
-      <!-- 意大利语 -->
+      <!-- ITALIANO -->
 
       <button
         class="language-option"
@@ -323,7 +461,7 @@
       </button>
 
 
-      <!-- 英语 -->
+      <!-- ENGLISH -->
 
       <button
         class="language-option"
@@ -387,6 +525,7 @@
     Scegli il ristorante
   </h1>
 
+
   <div
     class="subtitle"
     id="pageSubtitle">
@@ -402,7 +541,8 @@
 
   <a
     class="restaurant"
-    href="biella.html">
+    href="biella.html"
+    onclick="trackRestaurant('biella')">
 
     <span>
       Sushic Biella
@@ -421,7 +561,8 @@
 
   <a
     class="restaurant"
-    href="cassano.html">
+    href="cassano.html"
+    onclick="trackRestaurant('cassano')">
 
     <span>
       Sushic Cassano
@@ -451,24 +592,50 @@
   const translations = {
 
     it: {
-      title: "Scegli il ristorante",
-      subtitle: "Seleziona la sede",
-      languageName: "IT",
-      flag: "🇮🇹"
+
+      title:
+        "Scegli il ristorante",
+
+      subtitle:
+        "Seleziona la sede",
+
+      languageName:
+        "IT",
+
+      flag:
+        "🇮🇹"
     },
+
 
     en: {
-      title: "Choose a restaurant",
-      subtitle: "Select a location",
-      languageName: "EN",
-      flag: "🇬🇧"
+
+      title:
+        "Choose a restaurant",
+
+      subtitle:
+        "Select a location",
+
+      languageName:
+        "EN",
+
+      flag:
+        "🇬🇧"
     },
 
+
     zh: {
-      title: "选择餐厅",
-      subtitle: "请选择门店",
-      languageName: "中文",
-      flag: "🇨🇳"
+
+      title:
+        "选择餐厅",
+
+      subtitle:
+        "请选择门店",
+
+      languageName:
+        "中文",
+
+      flag:
+        "🇨🇳"
     }
 
   };
@@ -481,36 +648,47 @@
   function detectLanguage() {
 
     const browserLanguage =
-      (navigator.languages && navigator.languages[0]) ||
+      (
+        navigator.languages &&
+        navigator.languages[0]
+      ) ||
+
       navigator.language ||
+
       "it";
 
+
     const language =
-      browserLanguage.toLowerCase();
+      browserLanguage
+        .toLowerCase();
 
 
-    /* 中文 */
+    if (
+      language.startsWith("zh")
+    ) {
 
-    if (language.startsWith("zh")) {
       return "zh";
+
     }
 
 
-    /* 英语 */
+    if (
+      language.startsWith("en")
+    ) {
 
-    if (language.startsWith("en")) {
       return "en";
+
     }
 
 
-    /* 意大利语 */
+    if (
+      language.startsWith("it")
+    ) {
 
-    if (language.startsWith("it")) {
       return "it";
+
     }
 
-
-    /* 其他语言默认意大利语 */
 
     return "it";
 
@@ -518,7 +696,7 @@
 
 
   /* =========================
-     打开 / 关闭下拉菜单
+     打开 / 关闭语言菜单
      ========================= */
 
   function toggleLanguageMenu(event) {
@@ -526,9 +704,13 @@
     event.stopPropagation();
 
     document
-      .getElementById("languageMenu")
+      .getElementById(
+        "languageMenu"
+      )
       .classList
-      .toggle("open");
+      .toggle(
+        "open"
+      );
 
   }
 
@@ -543,39 +725,37 @@
       translations[language];
 
 
-    /* 页面标题 */
-
     document
-      .getElementById("pageTitle")
+      .getElementById(
+        "pageTitle"
+      )
       .textContent =
       text.title;
 
 
-    /* 页面副标题 */
-
     document
-      .getElementById("pageSubtitle")
+      .getElementById(
+        "pageSubtitle"
+      )
       .textContent =
       text.subtitle;
 
 
-    /* 当前国旗 */
-
     document
-      .getElementById("currentFlag")
+      .getElementById(
+        "currentFlag"
+      )
       .textContent =
       text.flag;
 
 
-    /* 当前语言 */
-
     document
-      .getElementById("currentLanguage")
+      .getElementById(
+        "currentLanguage"
+      )
       .textContent =
       text.languageName;
 
-
-    /* HTML 页面语言 */
 
     document.documentElement.lang =
       language === "zh"
@@ -583,25 +763,31 @@
         : language;
 
 
-    /* 清除选中状态 */
-
     document
-      .querySelectorAll(".language-option")
-      .forEach(function(option) {
+      .querySelectorAll(
+        ".language-option"
+      )
+      .forEach(
+        function(option) {
 
-        option.classList.remove("active");
+          option
+            .classList
+            .remove(
+              "active"
+            );
 
-      });
+        }
+      );
 
-
-    /* 标记当前语言 */
 
     document
       .getElementById(
         "option-" + language
       )
       .classList
-      .add("active");
+      .add(
+        "active"
+      );
 
   }
 
@@ -612,7 +798,12 @@
 
   function setLanguage(language) {
 
-    /* 保存用户选择 */
+    const previousLanguage =
+      localStorage.getItem(
+        "sushic-language"
+      ) ||
+      detectLanguage();
+
 
     localStorage.setItem(
       "sushic-language",
@@ -620,17 +811,77 @@
     );
 
 
-    /* 应用语言 */
+    applyLanguage(
+      language
+    );
 
-    applyLanguage(language);
 
+    /* Google Analytics：
+       记录主动切换语言 */
 
-    /* 选择后关闭菜单 */
+    if (
+      previousLanguage !== language &&
+      typeof gtag === "function"
+    ) {
+
+      gtag(
+        "event",
+        "language_change",
+        {
+          language_from:
+            previousLanguage,
+
+          language_to:
+            language,
+
+          page_type:
+            "home"
+        }
+      );
+
+    }
+
 
     document
-      .getElementById("languageMenu")
+      .getElementById(
+        "languageMenu"
+      )
       .classList
-      .remove("open");
+      .remove(
+        "open"
+      );
+
+  }
+
+
+  /* =========================
+     点击门店统计
+     ========================= */
+
+  function trackRestaurant(
+    restaurant
+  ) {
+
+    if (
+      typeof gtag === "function"
+    ) {
+
+      gtag(
+        "event",
+        "restaurant_select",
+        {
+          restaurant:
+            restaurant,
+
+          language:
+            localStorage.getItem(
+              "sushic-language"
+            ) ||
+            detectLanguage()
+        }
+      );
+
+    }
 
   }
 
@@ -644,14 +895,23 @@
     function(event) {
 
       const menu =
-        document.getElementById(
-          "languageMenu"
-        );
+        document
+          .getElementById(
+            "languageMenu"
+          );
 
 
-      if (!menu.contains(event.target)) {
+      if (
+        !menu.contains(
+          event.target
+        )
+      ) {
 
-        menu.classList.remove("open");
+        menu
+          .classList
+          .remove(
+            "open"
+          );
 
       }
 
@@ -674,7 +934,9 @@
     detectLanguage();
 
 
-  applyLanguage(initialLanguage);
+  applyLanguage(
+    initialLanguage
+  );
 
 </script>
 
