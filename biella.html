@@ -66,11 +66,14 @@
       width: 100%;
       padding: 20px;
       margin-bottom: 14px;
+
       background: white;
       color: #111;
       text-decoration: none;
+
       border: 1px solid #e7e7e7;
       border-radius: 16px;
+
       box-shadow: 0 5px 20px rgba(0,0,0,0.04);
     }
 
@@ -112,19 +115,23 @@
       font-size: 12px;
     }
 
-    /* Android 联系人提示 */
+    /* Android 联系人下载提示 */
+
     .contact-toast {
       position: fixed;
+
+      top: 20px;
       left: 20px;
       right: 20px;
-      bottom: 25px;
+
       max-width: 460px;
       margin: 0 auto;
 
       background: #111;
-      color: white;
+      color: #fff;
 
       padding: 16px 18px;
+
       border-radius: 14px;
 
       font-size: 14px;
@@ -133,10 +140,14 @@
       box-shadow: 0 8px 30px rgba(0,0,0,0.20);
 
       opacity: 0;
-      transform: translateY(20px);
+
+      transform: translateY(-20px);
+
       pointer-events: none;
 
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
 
       z-index: 9999;
     }
@@ -151,87 +162,199 @@
       font-size: 15px;
       margin-bottom: 3px;
     }
+
   </style>
 </head>
+
 
 <body>
 
 <main class="page">
 
-  <a class="back" href="index.html">‹ Scegli un altro ristorante</a>
+  <a class="back" href="index.html">
+    ‹ Scegli un altro ristorante
+  </a>
+
 
   <div class="header">
+
     <div class="logo-wrap">
-      <img src="sushic-logo.png" alt="Sushic Asian Experience" class="logo">
+      <img
+        src="sushic-logo.png"
+        alt="Sushic Asian Experience"
+        class="logo">
     </div>
-    <div class="location">BIELLA</div>
+
+    <div class="location">
+      BIELLA
+    </div>
+
   </div>
 
+
+  <!-- MENU -->
+
   <a class="button" href="menu-biella.html">
-    <div class="icon">🍣</div>
-    <div class="text">
-      <div class="title">Menu</div>
-      <div class="description">Consulta i nostri menu</div>
+
+    <div class="icon">
+      🍣
     </div>
-    <div class="arrow">›</div>
+
+    <div class="text">
+
+      <div class="title">
+        Menu
+      </div>
+
+      <div class="description">
+        Consulta i nostri menu
+      </div>
+
+    </div>
+
+    <div class="arrow">
+      ›
+    </div>
+
   </a>
 
-  <a class="button"
-     href="https://maps.app.goo.gl/JZCFM68shUyAX9Hh7?g_st=ic"
-     target="_blank"
-     rel="noopener">
-    <div class="icon">📍</div>
-    <div class="text">
-      <div class="title">Naviga</div>
-      <div class="description">Indicazioni per il ristorante</div>
+
+  <!-- NAVIGAZIONE -->
+
+  <a
+    class="button"
+    href="https://maps.app.goo.gl/JZCFM68shUyAX9Hh7?g_st=ic"
+    target="_blank"
+    rel="noopener">
+
+    <div class="icon">
+      📍
     </div>
-    <div class="arrow">›</div>
+
+    <div class="text">
+
+      <div class="title">
+        Naviga
+      </div>
+
+      <div class="description">
+        Indicazioni per il ristorante
+      </div>
+
+    </div>
+
+    <div class="arrow">
+      ›
+    </div>
+
   </a>
 
-  <a class="button" href="tel:+390153351624">
-    <div class="icon">☎️</div>
-    <div class="text">
-      <div class="title">Chiama</div>
-      <div class="description">Contatta il ristorante</div>
+
+  <!-- TELEFONO -->
+
+  <a
+    class="button"
+    href="tel:+390153351624">
+
+    <div class="icon">
+      ☎️
     </div>
-    <div class="arrow">›</div>
+
+    <div class="text">
+
+      <div class="title">
+        Chiama
+      </div>
+
+      <div class="description">
+        Contatta il ristorante
+      </div>
+
+    </div>
+
+    <div class="arrow">
+      ›
+    </div>
+
   </a>
 
-  <a class="button"
-     href="biella.vcf"
-     download
-     onclick="showContactHelp()">
-    <div class="icon">👤</div>
-    <div class="text">
-      <div class="title">Salva contatto</div>
-      <div class="description">Aggiungi Sushic Biella ai contatti</div>
+
+  <!-- SALVA CONTATTO -->
+
+  <a
+    class="button"
+    href="biella.vcf"
+    download
+    onclick="showContactHelp()">
+
+    <div class="icon">
+      👤
     </div>
-    <div class="arrow">›</div>
+
+    <div class="text">
+
+      <div class="title">
+        Salva contatto
+      </div>
+
+      <div class="description">
+        Aggiungi Sushic Biella ai contatti
+      </div>
+
+    </div>
+
+    <div class="arrow">
+      ›
+    </div>
+
   </a>
 
-  <footer>© Sushic Italy</footer>
+
+  <footer>
+    © Sushic Italy
+  </footer>
 
 </main>
 
-<div id="contactToast" class="contact-toast">
-  <strong>✓ Contatto scaricato</strong>
+
+<!-- ANDROID 提示 -->
+
+<div
+  id="contactToast"
+  class="contact-toast">
+
+  <strong>
+    ✓ Contatto scaricato
+  </strong>
+
   Apri il file scaricato per salvarlo nei contatti.
+
 </div>
 
+
 <script>
+
 function showContactHelp() {
+
   if (/Android/i.test(navigator.userAgent)) {
 
-    const toast = document.getElementById("contactToast");
+    const toast =
+      document.getElementById("contactToast");
 
     toast.classList.add("show");
 
     setTimeout(function () {
+
       toast.classList.remove("show");
+
     }, 6000);
+
   }
+
 }
+
 </script>
+
 
 </body>
 </html>
