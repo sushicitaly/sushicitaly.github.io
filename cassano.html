@@ -7,6 +7,19 @@
 
   <title>Sushic Cassano</title>
 
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B30JEWQ1T8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+    gtag("config", "G-B30JEWQ1T8");
+  </script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -105,10 +118,6 @@
         opacity 0.18s ease,
         transform 0.18s ease,
         visibility 0.18s ease;
-    }
-
-    .language-menu.open .language-arrow {
-      transform: rotate(180deg);
     }
 
     .language-menu.open .language-dropdown {
@@ -480,7 +489,10 @@
        MENU
        ========================= -->
 
-  <a class="button" href="menu-cassano.html">
+  <a
+    class="button"
+    href="menu-cassano.html"
+    onclick="trackAction('menu_click')">
 
     <div class="icon">🍣</div>
 
@@ -513,7 +525,8 @@
     class="button"
     href="https://maps.app.goo.gl/hta9JxhNLxUsiPXn6?g_st=ic"
     target="_blank"
-    rel="noopener">
+    rel="noopener"
+    onclick="trackAction('navigation_click')">
 
     <div class="icon">📍</div>
 
@@ -544,7 +557,8 @@
 
   <a
     class="button"
-    href="tel:+390331648325">
+    href="tel:+390331648325"
+    onclick="trackAction('phone_click')">
 
     <div class="icon">☎️</div>
 
@@ -577,7 +591,7 @@
     class="button"
     href="cassano.vcf"
     download
-    onclick="showContactHelp()">
+    onclick="trackContactSave()">
 
     <div class="icon">👤</div>
 
@@ -795,6 +809,49 @@
 
 
   /* =========================
+     当前语言
+     ========================= */
+
+  function getCurrentLanguage() {
+
+    return (
+      localStorage.getItem("sushic-language") ||
+      detectLanguage()
+    );
+  }
+
+
+  /* =========================
+     GA4 点击统计
+     ========================= */
+
+  function trackAction(eventName) {
+
+    if (typeof gtag === "function") {
+
+      gtag("event", eventName, {
+        restaurant: "cassano",
+        language: getCurrentLanguage(),
+        page_type: "restaurant"
+      });
+
+    }
+  }
+
+
+  /* =========================
+     联系人统计 + Android 提示
+     ========================= */
+
+  function trackContactSave() {
+
+    trackAction("contact_save");
+
+    showContactHelp();
+  }
+
+
+  /* =========================
      打开 / 关闭语言菜单
      ========================= */
 
@@ -881,10 +938,13 @@
 
 
   /* =========================
-     手动切换语言
+     手动切换语言 + GA4
      ========================= */
 
   function setLanguage(language) {
+
+    const previousLanguage =
+      getCurrentLanguage();
 
     localStorage.setItem(
       "sushic-language",
@@ -899,6 +959,20 @@
       .getElementById("languageMenu")
       .classList
       .remove("open");
+
+    if (
+      previousLanguage !== language &&
+      typeof gtag === "function"
+    ) {
+
+      gtag("event", "language_change", {
+        restaurant: "cassano",
+        page_type: "restaurant",
+        language_from: previousLanguage,
+        language_to: language
+      });
+
+    }
   }
 
 
@@ -995,8 +1069,7 @@
   function updateBusinessStatus() {
 
     const language =
-      localStorage.getItem("sushic-language") ||
-      detectLanguage();
+      getCurrentLanguage();
 
     const text =
       translations[language];
