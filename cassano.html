@@ -54,7 +54,6 @@
       border-radius: 10px;
 
       color: #333;
-
       font-family: inherit;
       font-size: 13px;
       font-weight: 600;
@@ -106,6 +105,10 @@
         opacity 0.18s ease,
         transform 0.18s ease,
         visibility 0.18s ease;
+    }
+
+    .language-menu.open .language-arrow {
+      transform: rotate(180deg);
     }
 
     .language-menu.open .language-dropdown {
@@ -170,7 +173,7 @@
 
     .header {
       text-align: center;
-      margin-bottom: 45px;
+      margin-bottom: 28px;
     }
 
     .logo-wrap {
@@ -194,12 +197,64 @@
     }
 
     /* =========================
-       按钮
+       营业状态
+       ========================= */
+
+    .business-hours {
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .business-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      padding: 8px 14px;
+
+      background: #ffffff;
+      border: 1px solid #e7e7e7;
+      border-radius: 20px;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      flex-shrink: 0;
+
+      border-radius: 50%;
+      background: #999;
+    }
+
+    .business-status.open .status-dot {
+      background: #28a745;
+    }
+
+    .business-status.closed .status-dot {
+      background: #d9534f;
+    }
+
+    .hours-detail {
+      margin-top: 9px;
+      color: #888;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       功能按钮
        ========================= */
 
     .button {
       display: flex;
       align-items: center;
+
       width: 100%;
       padding: 20px;
       margin-bottom: 14px;
@@ -258,6 +313,7 @@
 
     .contact-toast {
       position: fixed;
+
       top: 20px;
       left: 20px;
       right: 20px;
@@ -278,6 +334,7 @@
 
       opacity: 0;
       transform: translateY(-20px);
+
       pointer-events: none;
 
       transition:
@@ -304,7 +361,9 @@
 
 <main class="page">
 
-  <!-- 语言选择 -->
+  <!-- =========================
+       语言选择
+       ========================= -->
 
   <div class="language-menu" id="languageMenu">
 
@@ -360,7 +419,9 @@
   </div>
 
 
-  <!-- 返回首页 -->
+  <!-- =========================
+       返回首页
+       ========================= -->
 
   <a
     class="back"
@@ -370,25 +431,54 @@
   </a>
 
 
-  <!-- LOGO -->
+  <!-- =========================
+       LOGO + 门店 + 营业状态
+       ========================= -->
 
   <div class="header">
 
     <div class="logo-wrap">
+
       <img
         src="sushic-logo.png"
         alt="Sushic Asian Experience"
         class="logo">
+
     </div>
 
     <div class="location">
       CASSANO
     </div>
 
+
+    <div class="business-hours">
+
+      <div
+        class="business-status"
+        id="businessStatus">
+
+        <span class="status-dot"></span>
+
+        <span id="businessStatusText">
+          Caricamento...
+        </span>
+
+      </div>
+
+      <div
+        class="hours-detail"
+        id="hoursDetail">
+        Tutti i giorni · 12:00–15:00 / 19:00–23:30
+      </div>
+
+    </div>
+
   </div>
 
 
-  <!-- MENU -->
+  <!-- =========================
+       MENU
+       ========================= -->
 
   <a class="button" href="menu-cassano.html">
 
@@ -415,7 +505,9 @@
   </a>
 
 
-  <!-- NAVIGAZIONE -->
+  <!-- =========================
+       NAVIGAZIONE
+       ========================= -->
 
   <a
     class="button"
@@ -446,7 +538,9 @@
   </a>
 
 
-  <!-- TELEFONO -->
+  <!-- =========================
+       TELEFONO
+       ========================= -->
 
   <a
     class="button"
@@ -475,7 +569,9 @@
   </a>
 
 
-  <!-- SALVA CONTATTO -->
+  <!-- =========================
+       SALVA CONTATTO
+       ========================= -->
 
   <a
     class="button"
@@ -513,7 +609,9 @@
 </main>
 
 
-<!-- Android 顶部提示 -->
+<!-- =========================
+     Android 顶部提示
+     ========================= -->
 
 <div
   id="contactToast"
@@ -533,13 +631,31 @@
 <script>
 
   /* =========================
-     三语言文字
+     三语言
      ========================= */
 
   const translations = {
 
+    /* ---------- ITALIANO ---------- */
+
     it: {
+
       back: "‹ Scegli un altro ristorante",
+
+      hours:
+        "Tutti i giorni · 12:00–15:00 / 19:00–23:30",
+
+      openUntil:
+        "Aperto · Chiude alle ",
+
+      closedUntil:
+        "Chiuso · Apre alle ",
+
+      closedToday:
+        "Chiuso · Apre oggi alle 12:00",
+
+      closedTomorrow:
+        "Chiuso · Apre domani alle 12:00",
 
       menuTitle: "Menu",
       menuDescription: "Consulta i nostri menu",
@@ -562,8 +678,26 @@
     },
 
 
+    /* ---------- ENGLISH ---------- */
+
     en: {
+
       back: "‹ Choose another restaurant",
+
+      hours:
+        "Every day · 12:00–15:00 / 19:00–23:30",
+
+      openUntil:
+        "Open · Closes at ",
+
+      closedUntil:
+        "Closed · Opens at ",
+
+      closedToday:
+        "Closed · Opens today at 12:00",
+
+      closedTomorrow:
+        "Closed · Opens tomorrow at 12:00",
 
       menuTitle: "Menu",
       menuDescription: "View our menus",
@@ -586,8 +720,26 @@
     },
 
 
+    /* ---------- 中文 ---------- */
+
     zh: {
+
       back: "‹ 选择其他餐厅",
+
+      hours:
+        "每天 · 12:00–15:00 / 19:00–23:30",
+
+      openUntil:
+        "营业中 · 营业至 ",
+
+      closedUntil:
+        "休息中 · 营业时间 ",
+
+      closedToday:
+        "休息中 · 今天 12:00 营业",
+
+      closedTomorrow:
+        "已打烊 · 明天 12:00 营业",
 
       menuTitle: "菜单",
       menuDescription: "查看我们的菜单",
@@ -625,7 +777,6 @@
 
     const language =
       browserLanguage.toLowerCase();
-
 
     if (language.startsWith("zh")) {
       return "zh";
@@ -667,10 +818,8 @@
     const text =
       translations[language];
 
-
     document.getElementById("backText").textContent =
       text.back;
-
 
     document.getElementById("menuTitle").textContent =
       text.menuTitle;
@@ -678,13 +827,11 @@
     document.getElementById("menuDescription").textContent =
       text.menuDescription;
 
-
     document.getElementById("navigateTitle").textContent =
       text.navigateTitle;
 
     document.getElementById("navigateDescription").textContent =
       text.navigateDescription;
-
 
     document.getElementById("callTitle").textContent =
       text.callTitle;
@@ -692,13 +839,11 @@
     document.getElementById("callDescription").textContent =
       text.callDescription;
 
-
     document.getElementById("contactTitle").textContent =
       text.contactTitle;
 
     document.getElementById("contactDescription").textContent =
       text.contactDescription;
-
 
     document.getElementById("toastTitle").textContent =
       text.toastTitle;
@@ -706,19 +851,19 @@
     document.getElementById("toastDescription").textContent =
       text.toastDescription;
 
-
     document.getElementById("currentFlag").textContent =
       text.flag;
 
     document.getElementById("currentLanguage").textContent =
       text.languageName;
 
+    document.getElementById("hoursDetail").textContent =
+      text.hours;
 
     document.documentElement.lang =
       language === "zh"
         ? "zh-CN"
         : language;
-
 
     document
       .querySelectorAll(".language-option")
@@ -727,7 +872,6 @@
         option.classList.remove("active");
 
       });
-
 
     document
       .getElementById("option-" + language)
@@ -749,6 +893,8 @@
 
     applyLanguage(language);
 
+    updateBusinessStatus();
+
     document
       .getElementById("languageMenu")
       .classList
@@ -757,7 +903,7 @@
 
 
   /* =========================
-     点击外部关闭下拉菜单
+     点击其他地方关闭语言菜单
      ========================= */
 
   document.addEventListener(
@@ -800,7 +946,168 @@
 
 
   /* =========================
-     页面加载语言
+     获取意大利 Rome 当前时间
+     ========================= */
+
+  function getRomeMinutes() {
+
+    const parts =
+      new Intl.DateTimeFormat(
+        "en-GB",
+        {
+          timeZone: "Europe/Rome",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false
+        }
+      ).formatToParts(new Date());
+
+    const hour =
+      Number(
+        parts.find(
+          function(part) {
+            return part.type === "hour";
+          }
+        ).value
+      );
+
+    const minute =
+      Number(
+        parts.find(
+          function(part) {
+            return part.type === "minute";
+          }
+        ).value
+      );
+
+    return hour * 60 + minute;
+  }
+
+
+  /* =========================
+     自动营业状态
+
+     每天：
+     12:00–15:00
+     19:00–23:30
+     ========================= */
+
+  function updateBusinessStatus() {
+
+    const language =
+      localStorage.getItem("sushic-language") ||
+      detectLanguage();
+
+    const text =
+      translations[language];
+
+    const minutes =
+      getRomeMinutes();
+
+    const lunchOpen =
+      12 * 60;
+
+    const lunchClose =
+      15 * 60;
+
+    const dinnerOpen =
+      19 * 60;
+
+    const dinnerClose =
+      23 * 60 + 30;
+
+    const status =
+      document.getElementById("businessStatus");
+
+    const statusText =
+      document.getElementById("businessStatusText");
+
+    const hoursDetail =
+      document.getElementById("hoursDetail");
+
+
+    hoursDetail.textContent =
+      text.hours;
+
+
+    status.classList.remove(
+      "open",
+      "closed"
+    );
+
+
+    /* ---------- 00:00–12:00 ---------- */
+
+    if (minutes < lunchOpen) {
+
+      status.classList.add("closed");
+
+      statusText.textContent =
+        text.closedToday;
+
+      return;
+    }
+
+
+    /* ---------- 12:00–15:00 ---------- */
+
+    if (
+      minutes >= lunchOpen &&
+      minutes < lunchClose
+    ) {
+
+      status.classList.add("open");
+
+      statusText.textContent =
+        text.openUntil + "15:00";
+
+      return;
+    }
+
+
+    /* ---------- 15:00–19:00 ---------- */
+
+    if (
+      minutes >= lunchClose &&
+      minutes < dinnerOpen
+    ) {
+
+      status.classList.add("closed");
+
+      statusText.textContent =
+        text.closedUntil + "19:00";
+
+      return;
+    }
+
+
+    /* ---------- 19:00–23:30 ---------- */
+
+    if (
+      minutes >= dinnerOpen &&
+      minutes < dinnerClose
+    ) {
+
+      status.classList.add("open");
+
+      statusText.textContent =
+        text.openUntil + "23:30";
+
+      return;
+    }
+
+
+    /* ---------- 23:30–24:00 ---------- */
+
+    status.classList.add("closed");
+
+    statusText.textContent =
+      text.closedTomorrow;
+  }
+
+
+  /* =========================
+     页面加载
      ========================= */
 
   const savedLanguage =
@@ -808,13 +1115,21 @@
       "sushic-language"
     );
 
-
   const initialLanguage =
     savedLanguage ||
     detectLanguage();
 
-
   applyLanguage(initialLanguage);
+
+  updateBusinessStatus();
+
+
+  /* 每分钟自动重新判断一次 */
+
+  setInterval(
+    updateBusinessStatus,
+    60000
+  );
 
 </script>
 
