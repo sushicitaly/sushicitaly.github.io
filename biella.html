@@ -320,48 +320,48 @@
        ========================= */
 
     .contact-toast {
-      position: fixed;
+  position: fixed;
 
-      top: 20px;
-      left: 20px;
-      right: 20px;
+  top: 50%;
+  left: 50%;
 
-      max-width: 460px;
-      margin: 0 auto;
+  width: calc(100% - 48px);
+  max-width: 420px;
 
-      background: #111;
-      color: #fff;
+  background: #111;
+  color: #fff;
 
-      padding: 16px 18px;
-      border-radius: 14px;
+  padding: 18px 20px;
+  border-radius: 14px;
 
-      font-size: 14px;
-      line-height: 1.4;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
 
-      box-shadow: 0 8px 30px rgba(0,0,0,0.20);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.20);
 
-      opacity: 0;
-      transform: translateY(-20px);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.96);
 
-      pointer-events: none;
+  pointer-events: none;
 
-      transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 
-      z-index: 9999;
-    }
+  z-index: 9999;
+}
 
-    .contact-toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.contact-toast.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
 
-    .contact-toast strong {
-      display: block;
-      font-size: 15px;
-      margin-bottom: 3px;
-    }
+.contact-toast strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
   </style>
 </head>
 
