@@ -317,32 +317,32 @@
     }
 
     /* =========================
-       Android 联系人下载提示
+       Android 联系人中央提示
        ========================= */
 
     .contact-toast {
       position: fixed;
 
-      top: 20px;
-      left: 20px;
-      right: 20px;
+      top: 50%;
+      left: 50%;
 
-      max-width: 460px;
-      margin: 0 auto;
+      width: calc(100% - 48px);
+      max-width: 420px;
 
       background: #111;
       color: #fff;
 
-      padding: 16px 18px;
+      padding: 18px 20px;
       border-radius: 14px;
 
       font-size: 14px;
-      line-height: 1.4;
+      line-height: 1.5;
+      text-align: center;
 
       box-shadow: 0 8px 30px rgba(0,0,0,0.20);
 
       opacity: 0;
-      transform: translateY(-20px);
+      transform: translate(-50%, -50%) scale(0.96);
 
       pointer-events: none;
 
@@ -355,13 +355,13 @@
 
     .contact-toast.show {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate(-50%, -50%) scale(1);
     }
 
     .contact-toast strong {
       display: block;
       font-size: 15px;
-      margin-bottom: 3px;
+      margin-bottom: 5px;
     }
   </style>
 </head>
@@ -370,9 +370,7 @@
 
 <main class="page">
 
-  <!-- =========================
-       语言选择
-       ========================= -->
+  <!-- 语言选择 -->
 
   <div class="language-menu" id="languageMenu">
 
@@ -395,10 +393,8 @@
         id="option-it"
         type="button"
         onclick="setLanguage('it')">
-
         <span class="flag">🇮🇹</span>
         <span>IT</span>
-
       </button>
 
       <button
@@ -406,10 +402,8 @@
         id="option-en"
         type="button"
         onclick="setLanguage('en')">
-
         <span class="flag">🇬🇧</span>
         <span>EN</span>
-
       </button>
 
       <button
@@ -417,20 +411,15 @@
         id="option-zh"
         type="button"
         onclick="setLanguage('zh')">
-
         <span class="flag">🇨🇳</span>
         <span>中文</span>
-
       </button>
 
     </div>
 
   </div>
 
-
-  <!-- =========================
-       返回首页
-       ========================= -->
+  <!-- 返回首页 -->
 
   <a
     class="back"
@@ -439,26 +428,20 @@
     ‹ Scegli un altro ristorante
   </a>
 
-
-  <!-- =========================
-       LOGO + 门店 + 营业状态
-       ========================= -->
+  <!-- LOGO + 门店 + 营业状态 -->
 
   <div class="header">
 
     <div class="logo-wrap">
-
       <img
         src="sushic-logo.png"
         alt="Sushic Asian Experience"
         class="logo">
-
     </div>
 
     <div class="location">
       CASSANO
     </div>
-
 
     <div class="business-hours">
 
@@ -484,10 +467,7 @@
 
   </div>
 
-
-  <!-- =========================
-       MENU
-       ========================= -->
+  <!-- MENU -->
 
   <a
     class="button"
@@ -497,29 +477,20 @@
     <div class="icon">🍣</div>
 
     <div class="text">
-
-      <div
-        class="title"
-        id="menuTitle">
+      <div class="title" id="menuTitle">
         Menu
       </div>
 
-      <div
-        class="description"
-        id="menuDescription">
+      <div class="description" id="menuDescription">
         Consulta i nostri menu
       </div>
-
     </div>
 
     <div class="arrow">›</div>
 
   </a>
 
-
-  <!-- =========================
-       NAVIGAZIONE
-       ========================= -->
+  <!-- NAVIGAZIONE -->
 
   <a
     class="button"
@@ -531,29 +502,20 @@
     <div class="icon">📍</div>
 
     <div class="text">
-
-      <div
-        class="title"
-        id="navigateTitle">
+      <div class="title" id="navigateTitle">
         Naviga
       </div>
 
-      <div
-        class="description"
-        id="navigateDescription">
+      <div class="description" id="navigateDescription">
         Indicazioni per il ristorante
       </div>
-
     </div>
 
     <div class="arrow">›</div>
 
   </a>
 
-
-  <!-- =========================
-       TELEFONO
-       ========================= -->
+  <!-- TELEFONO -->
 
   <a
     class="button"
@@ -563,40 +525,29 @@
     <div class="icon">☎️</div>
 
     <div class="text">
-
-      <div
-        class="title"
-        id="callTitle">
+      <div class="title" id="callTitle">
         Chiama
       </div>
 
-      <div
-        class="description"
-        id="callDescription">
+      <div class="description" id="callDescription">
         Contatta il ristorante
       </div>
-
     </div>
 
     <div class="arrow">›</div>
 
   </a>
 
-
-  <!-- =========================
-       SALVA CONTATTO
-       ========================= -->
+  <!-- SALVA CONTATTO -->
 
   <a
     class="button"
-    href="cassano.vcf"
-    download
-    onclick="trackContactSave()">
+    href="#"
+    onclick="openContact(event)">
 
     <div class="icon">👤</div>
 
     <div class="text">
-
       <div
         class="title"
         id="contactTitle">
@@ -608,13 +559,11 @@
         id="contactDescription">
         Aggiungi Sushic Cassano ai contatti
       </div>
-
     </div>
 
     <div class="arrow">›</div>
 
   </a>
-
 
   <footer>
     © Sushic Italy
@@ -622,25 +571,21 @@
 
 </main>
 
-
-<!-- =========================
-     Android 顶部提示
-     ========================= -->
+<!-- Android 中央提示 -->
 
 <div
   id="contactToast"
   class="contact-toast">
 
   <strong id="toastTitle">
-    ✓ Contatto scaricato
+    ✓ Contatto pronto
   </strong>
 
   <span id="toastDescription">
-    Apri il file scaricato per salvarlo nei contatti.
+    Apri il file scaricato per aggiungerlo ai contatti.
   </span>
 
 </div>
-
 
 <script>
 
@@ -649,8 +594,6 @@
      ========================= */
 
   const translations = {
-
-    /* ---------- ITALIANO ---------- */
 
     it: {
 
@@ -683,16 +626,13 @@
       contactTitle: "Salva contatto",
       contactDescription: "Aggiungi Sushic Cassano ai contatti",
 
-      toastTitle: "✓ Contatto scaricato",
+      toastTitle: "✓ Contatto pronto",
       toastDescription:
-        "Apri il file scaricato per salvarlo nei contatti.",
+        "Apri il file scaricato per aggiungerlo ai contatti.",
 
       languageName: "IT",
       flag: "🇮🇹"
     },
-
-
-    /* ---------- ENGLISH ---------- */
 
     en: {
 
@@ -725,16 +665,13 @@
       contactTitle: "Save contact",
       contactDescription: "Add Sushic Cassano to your contacts",
 
-      toastTitle: "✓ Contact downloaded",
+      toastTitle: "✓ Contact ready",
       toastDescription:
-        "Open the downloaded file to save it to your contacts.",
+        "Open the downloaded file to add it to your contacts.",
 
       languageName: "EN",
       flag: "🇬🇧"
     },
-
-
-    /* ---------- 中文 ---------- */
 
     zh: {
 
@@ -767,16 +704,15 @@
       contactTitle: "保存联系人",
       contactDescription: "将 Sushic Cassano 添加到通讯录",
 
-      toastTitle: "✓ 联系人已下载",
+      toastTitle: "✓ 联系人已准备好",
       toastDescription:
-        "打开已下载的文件，将 Sushic Cassano 保存到通讯录。",
+        "打开下载的文件，将 Sushic Cassano 添加到通讯录。",
 
       languageName: "中文",
       flag: "🇨🇳"
     }
 
   };
-
 
   /* =========================
      自动检测系统语言
@@ -807,10 +743,7 @@
     return "it";
   }
 
-
-  /* =========================
-     当前语言
-     ========================= */
+  /* 当前语言 */
 
   function getCurrentLanguage() {
 
@@ -819,7 +752,6 @@
       detectLanguage()
     );
   }
-
 
   /* =========================
      GA4 点击统计
@@ -838,18 +770,66 @@
     }
   }
 
-
-  /* =========================
-     联系人统计 + Android 提示
-     ========================= */
+  /* 联系人统计 */
 
   function trackContactSave() {
-
     trackAction("contact_save");
-
-    showContactHelp();
   }
 
+  /* =========================
+     iOS / Android 联系人自动分流
+     ========================= */
+
+  function openContact(event) {
+
+    event.preventDefault();
+
+    trackContactSave();
+
+    const userAgent =
+      navigator.userAgent || "";
+
+    const isAndroid =
+      /Android/i.test(userAgent);
+
+    const isIOS =
+      /iPad|iPhone|iPod/i.test(userAgent) ||
+      (
+        navigator.platform === "MacIntel" &&
+        navigator.maxTouchPoints > 1
+      );
+
+    /* iPhone / iPad */
+
+    if (isIOS) {
+
+      window.location.href =
+        "cassano-iOS.vcf";
+
+      return;
+    }
+
+    /* Android */
+
+    if (isAndroid) {
+
+      showContactHelp();
+
+      setTimeout(function() {
+
+        window.location.href =
+          "cassano-Android.vcf";
+
+      }, 250);
+
+      return;
+    }
+
+    /* 电脑或其他设备 */
+
+    window.location.href =
+      "cassano-Android.vcf";
+  }
 
   /* =========================
      打开 / 关闭语言菜单
@@ -864,7 +844,6 @@
       .classList
       .toggle("open");
   }
-
 
   /* =========================
      应用语言
@@ -936,7 +915,6 @@
       .add("active");
   }
 
-
   /* =========================
      手动切换语言 + GA4
      ========================= */
@@ -975,10 +953,7 @@
     }
   }
 
-
-  /* =========================
-     点击其他地方关闭语言菜单
-     ========================= */
+  /* 点击其他地方关闭语言菜单 */
 
   document.addEventListener(
     "click",
@@ -996,9 +971,8 @@
     }
   );
 
-
   /* =========================
-     Android 联系人下载提示
+     Android 联系人中央提示
      ========================= */
 
   function showContactHelp() {
@@ -1015,9 +989,9 @@
         toast.classList.remove("show");
 
       }, 6000);
+
     }
   }
-
 
   /* =========================
      获取意大利 Rome 当前时间
@@ -1056,7 +1030,6 @@
 
     return hour * 60 + minute;
   }
-
 
   /* =========================
      自动营业状态
@@ -1098,18 +1071,15 @@
     const hoursDetail =
       document.getElementById("hoursDetail");
 
-
     hoursDetail.textContent =
       text.hours;
-
 
     status.classList.remove(
       "open",
       "closed"
     );
 
-
-    /* ---------- 00:00–12:00 ---------- */
+    /* 00:00–12:00 */
 
     if (minutes < lunchOpen) {
 
@@ -1121,8 +1091,7 @@
       return;
     }
 
-
-    /* ---------- 12:00–15:00 ---------- */
+    /* 12:00–15:00 */
 
     if (
       minutes >= lunchOpen &&
@@ -1137,8 +1106,7 @@
       return;
     }
 
-
-    /* ---------- 15:00–19:00 ---------- */
+    /* 15:00–19:00 */
 
     if (
       minutes >= lunchClose &&
@@ -1153,8 +1121,7 @@
       return;
     }
 
-
-    /* ---------- 19:00–23:30 ---------- */
+    /* 19:00–23:30 */
 
     if (
       minutes >= dinnerOpen &&
@@ -1169,15 +1136,13 @@
       return;
     }
 
-
-    /* ---------- 23:30–24:00 ---------- */
+    /* 23:30–24:00 */
 
     status.classList.add("closed");
 
     statusText.textContent =
       text.closedTomorrow;
   }
-
 
   /* =========================
      页面加载
@@ -1195,7 +1160,6 @@
   applyLanguage(initialLanguage);
 
   updateBusinessStatus();
-
 
   /* 每分钟自动重新判断一次 */
 
