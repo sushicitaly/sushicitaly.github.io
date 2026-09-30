@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7f5">
+
+  <title>Privacy Policy | Sushic Italy</title>
+
+  <link rel="icon" href="/favicon.svg?v=8" type="image/svg+xml" sizes="any">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: #f7f7f5;
+      color: #111;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 30px 24px 60px;
+    }
+
+    /* LANGUAGE */
+
+    .language-menu {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      z-index: 1000;
+    }
+
+    .language-current {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      min-width: 82px;
+      padding: 8px 10px;
+
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+
+      color: #333;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      box-shadow: 0 3px 12px rgba(0,0,0,.05);
+    }
+
+    .language-current:active {
+      transform: scale(.98);
+    }
+
+    .language-arrow {
+      color: #999;
+      font-size: 9px;
+      transition: transform .2s ease;
+    }
+
+    .language-menu.open .language-arrow {
+      transform: rotate(180deg);
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 7px);
+      right: 0;
+
+      width: 105px;
+      padding: 6px;
+
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+
+      box-shadow: 0 8px 25px rgba(0,0,0,.10);
+
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-5px);
+
+      transition:
+        opacity .18s ease,
+        transform .18s ease,
+        visibility .18s ease;
+    }
+
+    .language-menu.open .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      width: 100%;
+      padding: 10px 9px;
+
+      border: 0;
+      border-radius: 8px;
+
+      background: transparent;
+      color: #333;
+
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+
+      cursor: pointer;
+    }
+
+    .language-option:hover {
+      background: #f5f5f3;
+    }
+
+    .language-option.active {
+      background: #f2f2f0;
+      font-weight: 600;
+    }
+
+    /* PAGE */
+
+    .back {
+      display: inline-block;
+      margin-bottom: 35px;
+      padding-top: 5px;
+
+      color: #777;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .logo {
+      display: block;
+      width: 180px;
+      max-width: 60%;
+      height: auto;
+      margin: 0 auto 25px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      font-weight: 650;
+    }
+
+    .updated {
+      color: #888;
+      font-size: 13px;
+    }
+
+    .policy {
+      background: #fff;
+      border: 1px solid #e7e7e7;
+      border-radius: 18px;
+
+      padding: 30px;
+
+      box-shadow: 0 5px 20px rgba(0,0,0,.04);
+    }
+
+    .policy h2 {
+      margin: 32px 0 12px;
+      font-size: 19px;
+    }
+
+    .policy h2:first-child {
+      margin-top: 0;
+    }
+
+    .policy p,
+    .policy li {
+      color: #444;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .policy ul {
+      padding-left: 22px;
+    }
+
+    .company {
+      padding: 18px;
+      margin: 15px 0;
+
+      background: #f7f7f5;
+      border-radius: 12px;
+
+      line-height: 1.7;
+    }
+
+    .policy a {
+      color: #111;
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    @media (max-width: 520px) {
+      .policy {
+        padding: 24px 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<main class="page">
+
+  <div class="language-menu" id="languageMenu">
+
+    <button
+      class="language-current"
+      type="button"
+      onclick="toggleLanguageMenu(event)">
+
+      <span id="currentFlag">🇮🇹</span>
+      <span id="currentLanguage">IT</span>
+      <span class="language-arrow">▼</span>
+
+    </button>
+
+    <div class="language-dropdown">
+
+      <button
+        class="language-option"
+        id="option-it"
+        onclick="setLanguage('it')">
+        🇮🇹 IT
+      </button>
+
+      <button
+        class="language-option"
+        id="option-en"
+        onclick="setLanguage('en')">
+        🇬🇧 EN
+      </button>
+
+      <button
+        class="language-option"
+        id="option-zh"
+        onclick="setLanguage('zh')">
+        🇨🇳 中文
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <a class="back" href="index.html" id="backText">
+    ‹ Torna al sito
+  </a>
+
+
+  <header class="header">
+
+    <img
+      src="sushic-logo.png"
+      alt="Sushic"
+      class="logo">
+
+    <h1 id="pageTitle">
+      Informativa Privacy
+    </h1>
+
+    <div class="updated" id="updatedText">
+      Ultimo aggiornamento: 30 settembre 2026
+    </div>
+
+  </header>
+
+
+  <!-- ITALIANO -->
+
+  <article class="policy language-content" id="content-it">
+
+    <h2>1. Titolare del trattamento</h2>
+
+    <p>
+      Ai sensi del Regolamento (UE) 2016/679 (“GDPR”),
+      il Titolare del trattamento dei dati personali
+      effettuato attraverso questo sito è:
+    </p>
+
+    <div class="company">
+      <strong>SUSHIC CASSANO S.A.S. DI WEN FEIYUN &amp; C.</strong><br>
+      Via IV Novembre, 18<br>
+      21012 Cassano Magnago (VA), Italia<br>
+      C.F./P.IVA 03612830129<br>
+      Email:
+      <a href="mailto:amministrazione.wen@gmail.com">
+        amministrazione.wen@gmail.com
+      </a>
+    </div>
+
+
+    <h2>2. Dati trattati durante la navigazione</h2>
+
+    <p>
+      Durante il normale funzionamento del sito, i sistemi
+      informatici e i servizi utilizzati per la sua erogazione
+      possono trattare alcuni dati tecnici relativi alla
+      navigazione, quali indirizzo IP, tipo di browser,
+      dispositivo utilizzato, data e ora della richiesta,
+      pagine richieste e informazioni tecniche necessarie
+      al funzionamento e alla sicurezza del servizio.
+    </p>
+
+
+    <h2>3. Google Analytics</h2>
+
+    <p>
+      Il sito utilizza Google Analytics 4 (GA4), un servizio
+      fornito da Google, per ottenere informazioni statistiche
+      sull'utilizzo del sito e comprendere, ad esempio, quali
+      sedi e funzioni vengono utilizzate maggiormente.
+    </p>
+
+    <p>
+      Attraverso Analytics possono essere trattate informazioni
+      relative all'interazione con il sito, al dispositivo,
+      al browser e dati tecnici relativi alla navigazione.
+    </p>
+
+    <p>
+      Quando richiesto dalla normativa applicabile,
+      Google Analytics viene utilizzato solo dopo che
+      l'utente ha espresso il proprio consenso.
+      L'utente può rifiutare o successivamente modificare
+      la propria scelta senza perdere l'accesso alle
+      funzionalità principali del sito.
+    </p>
+
+
+    <h2>4. Preferenza della lingua</h2>
+
+    <p>
+      Il sito può memorizzare localmente sul dispositivo
+      dell'utente la lingua selezionata (italiano, inglese
+      o cinese) tramite la funzione localStorage del browser.
+    </p>
+
+    <p>
+      Questa informazione viene utilizzata esclusivamente
+      per ricordare la preferenza linguistica e migliorare
+      la navigazione del sito.
+    </p>
+
+
+    <h2>5. Finalità del trattamento</h2>
+
+    <p>I dati possono essere trattati per:</p>
+
+    <ul>
+      <li>fornire e rendere accessibile il sito;</li>
+      <li>garantire sicurezza e corretto funzionamento;</li>
+      <li>ricordare la lingua selezionata;</li>
+      <li>
+        elaborare statistiche sull'utilizzo del sito,
+        nei casi e secondo le modalità consentite dalla legge;
+      </li>
+      <li>
+        consentire l'utilizzo delle funzioni richieste
+        dall'utente.
+      </li>
+    </ul>
+
+
+    <h2>6. Base giuridica</h2>
+
+    <p>
+      Il trattamento dei dati strettamente necessario
+      al funzionamento e alla sicurezza del sito si basa,
+      a seconda del trattamento, sulla necessità di fornire
+      il servizio richiesto dall'utente e sul legittimo
+      interesse del Titolare alla sicurezza e al corretto
+      funzionamento del sito.
+    </p>
+
+    <p>
+      Per i trattamenti che richiedono il consenso,
+      inclusi gli strumenti di misurazione quando il consenso
+      è richiesto dalla normativa applicabile, la base
+      giuridica è il consenso dell'interessato.
+    </p>
+
+
+    <h2>7. Collegamenti e funzioni esterne</h2>
+
+    <p>
+      Il sito contiene collegamenti che permettono
+      all'utente di aprire servizi esterni, ad esempio
+      Google Maps per la navigazione.
+    </p>
+
+    <p>
+      Il trasferimento verso il servizio esterno avviene
+      quando l'utente sceglie di utilizzare il relativo
+      collegamento. Da quel momento il trattamento dei dati
+      può essere effettuato anche dal fornitore del servizio
+      esterno secondo la propria informativa privacy.
+    </p>
+
+    <p>
+      Le funzioni per effettuare una chiamata telefonica
+      o salvare il contatto del ristorante utilizzano
+      funzionalità del dispositivo dell'utente.
+    </p>
+
+
+    <h2>8. Destinatari dei dati</h2>
+
+    <p>
+      I dati possono essere trattati, nei limiti necessari,
+      da fornitori di servizi tecnici utilizzati per
+      l'erogazione e la gestione del sito e, quando attivo,
+      dal fornitore del servizio di analisi Google Analytics.
+    </p>
+
+    <p>
+      Per gli utenti europei, i servizi Google possono
+      coinvolgere Google Ireland Limited e altre società
+      del gruppo Google secondo le condizioni e le
+      informative applicabili ai relativi servizi.
+    </p>
+
+
+    <h2>9. Trasferimenti internazionali</h2>
+
+    <p>
+      Alcuni fornitori di servizi possono trattare o rendere
+      accessibili dati anche da Paesi situati al di fuori
+      dello Spazio Economico Europeo.
+    </p>
+
+    <p>
+      In tali casi il trattamento e gli eventuali
+      trasferimenti vengono effettuati secondo i meccanismi
+      previsti dalla normativa applicabile in materia di
+      protezione dei dati.
+    </p>
+
+
+    <h2>10. Conservazione dei dati</h2>
+
+    <p>
+      I dati personali vengono conservati per il tempo
+      necessario alle finalità per le quali sono stati
+      raccolti e nel rispetto dei periodi applicabili
+      ai singoli servizi utilizzati.
+    </p>
+
+    <p>
+      Le preferenze memorizzate localmente nel browser
+      possono rimanere sul dispositivo fino alla loro
+      modifica o cancellazione da parte dell'utente
+      o del browser.
+    </p>
+
+
+    <h2>11. Diritti dell'interessato</h2>
+
+    <p>
+      Nei casi previsti dal GDPR, l'interessato può
+      esercitare i diritti di accesso, rettifica,
+      cancellazione, limitazione del trattamento,
+      opposizione e portabilità dei dati.
+    </p>
+
+    <p>
+      Quando il trattamento è basato sul consenso,
+      il consenso può essere revocato in qualsiasi momento,
+      senza pregiudicare la liceità del trattamento
+      effettuato prima della revoca.
+    </p>
+
+    <p>
+      Le richieste possono essere inviate a:
+      <a href="mailto:amministrazione.wen@gmail.com">
+        amministrazione.wen@gmail.com
+      </a>.
+    </p>
+
+
+    <h2>12. Reclamo all'Autorità di controllo</h2>
+
+    <p>
+      L'interessato ha inoltre il diritto di proporre
+      reclamo al Garante per la protezione dei dati personali
+      o all'autorità di controllo competente secondo quanto
+      previsto dalla normativa applicabile.
+    </p>
+
+
+    <h2>13. Modifiche alla presente informativa</h2>
+
+    <p>
+      La presente informativa può essere aggiornata
+      per riflettere modifiche normative, tecniche
+      o dei servizi utilizzati dal sito.
+    </p>
+
+  </article>
+
+
+  <!-- ENGLISH -->
+
+  <article
+    class="policy language-content"
+    id="content-en"
+    style="display:none;">
+
+    <h2>1. Data Controller</h2>
+
+    <p>
+      Under Regulation (EU) 2016/679 (“GDPR”),
+      the Data Controller for the processing of personal
+      data through this website is:
+    </p>
+
+    <div class="company">
+      <strong>SUSHIC CASSANO S.A.S. DI WEN FEIYUN &amp; C.</strong><br>
+      Via IV Novembre, 18<br>
+      21012 Cassano Magnago (VA), Italy<br>
+      Tax Code / VAT No. 03612830129<br>
+      Email:
+      <a href="mailto:amministrazione.wen@gmail.com">
+        amministrazione.wen@gmail.com
+      </a>
+    </div>
+
+
+    <h2>2. Browsing data</h2>
+
+    <p>
+      During normal operation of the website, the systems
+      and services used to provide it may process technical
+      browsing data such as IP address, browser type,
+      device information, date and time of requests,
+      requested pages and other technical information
+      necessary for the operation and security of the service.
+    </p>
+
+
+    <h2>3. Google Analytics</h2>
+
+    <p>
+      This website uses Google Analytics 4 (GA4), a service
+      provided by Google, to obtain statistical information
+      about how the website is used.
+    </p>
+
+    <p>
+      Analytics may process information concerning
+      interactions with the website, the device and browser,
+      and technical browsing information.
+    </p>
+
+    <p>
+      Where required by applicable law, Google Analytics
+      is used only after the user has given consent.
+      Users may refuse or later change their choice without
+      losing access to the website's main functions.
+    </p>
+
+
+    <h2>4. Language preference</h2>
+
+    <p>
+      The website may store the user's selected language
+      (Italian, English or Chinese) locally on the device
+      using the browser's localStorage function.
+    </p>
+
+    <p>
+      This information is used only to remember the selected
+      language and improve the browsing experience.
+    </p>
+
+
+    <h2>5. Purposes of processing</h2>
+
+    <p>Data may be processed in order to:</p>
+
+    <ul>
+      <li>provide and make the website accessible;</li>
+      <li>ensure security and proper operation;</li>
+      <li>remember the selected language;</li>
+      <li>
+        produce website usage statistics where and in
+        the manner permitted by applicable law;
+      </li>
+      <li>provide functions requested by the user.</li>
+    </ul>
+
+
+    <h2>6. Legal basis</h2>
+
+    <p>
+      Processing strictly necessary for the operation
+      and security of the website is based, depending on
+      the processing activity, on providing the service
+      requested by the user and on the Controller's
+      legitimate interest in maintaining the security
+      and proper operation of the website.
+    </p>
+
+    <p>
+      Where consent is required, including for measurement
+      technologies when required by applicable law,
+      processing is based on the user's consent.
+    </p>
+
+
+    <h2>7. External links and functions</h2>
+
+    <p>
+      The website contains links that allow users to open
+      external services, such as Google Maps for directions.
+    </p>
+
+    <p>
+      Users are transferred to the external service only
+      when they choose to use the relevant link.
+      From that point, the external provider may process
+      data according to its own privacy policy.
+    </p>
+
+    <p>
+      Telephone calling and restaurant contact-saving
+      functions use features available on the user's device.
+    </p>
+
+
+    <h2>8. Recipients</h2>
+
+    <p>
+      Data may be processed, where necessary, by technical
+      service providers used to operate and manage the
+      website and, when active, by the provider of
+      Google Analytics.
+    </p>
+
+    <p>
+      For European users, Google services may involve
+      Google Ireland Limited and other Google group
+      companies in accordance with the terms and privacy
+      information applicable to those services.
+    </p>
+
+
+    <h2>9. International transfers</h2>
+
+    <p>
+      Certain service providers may process or make data
+      accessible from countries outside the European
+      Economic Area.
+    </p>
+
+    <p>
+      Where applicable, such processing and transfers
+      are carried out using the mechanisms provided by
+      applicable data protection law.
+    </p>
+
+
+    <h2>10. Data retention</h2>
+
+    <p>
+      Personal data is retained for no longer than necessary
+      for the purposes for which it was collected and in
+      accordance with the retention periods applicable
+      to the services used.
+    </p>
+
+    <p>
+      Preferences stored locally in the browser may remain
+      on the device until they are changed or deleted
+      by the user or browser.
+    </p>
+
+
+    <h2>11. Data subject rights</h2>
+
+    <p>
+      Where provided by the GDPR, users may exercise
+      their rights of access, rectification, erasure,
+      restriction of processing, objection and data
+      portability.
+    </p>
+
+    <p>
+      Where processing is based on consent, consent may
+      be withdrawn at any time without affecting the
+      lawfulness of processing carried out before withdrawal.
+    </p>
+
+    <p>
+      Requests may be sent to:
+      <a href="mailto:amministrazione.wen@gmail.com">
+        amministrazione.wen@gmail.com
+      </a>.
+    </p>
+
+
+    <h2>12. Complaint to a supervisory authority</h2>
+
+    <p>
+      Users also have the right to lodge a complaint with
+      the Italian Data Protection Authority (Garante per
+      la protezione dei dati personali) or another competent
+      supervisory authority, where applicable.
+    </p>
+
+
+    <h2>13. Changes to this Privacy Policy</h2>
+
+    <p>
+      This Privacy Policy may be updated to reflect
+      regulatory, technical or service-related changes.
+    </p>
+
+  </article>
+
+
+  <!-- 中文 -->
+
+  <article
+    class="policy language-content"
+    id="content-zh"
+    style="display:none;">
+
+    <h2>1. 数据控制者</h2>
+
+    <p>
+      根据《欧盟通用数据保护条例》
+      Regulation (EU) 2016/679（GDPR），
+      通过本网站进行个人数据处理的数据控制者为：
+    </p>
+
+    <div class="company">
+      <strong>SUSHIC CASSANO S.A.S. DI WEN FEIYUN &amp; C.</strong><br>
+      Via IV Novembre, 18<br>
+      21012 Cassano Magnago (VA), Italia<br>
+      C.F./P.IVA 03612830129<br>
+      Email:
+      <a href="mailto:amministrazione.wen@gmail.com">
+        amministrazione.wen@gmail.com
+      </a>
+    </div>
+
+
+    <h2>2. 网站访问数据</h2>
+
+    <p>
+      在网站正常运行过程中，为提供网站服务所使用的系统和服务
+      可能会处理部分技术性访问数据，例如 IP 地址、浏览器类型、
+      使用的设备、访问日期和时间、请求的页面，以及保证网站正常
+      运行和安全所需要的其他技术信息。
+    </p>
+
+
+    <h2>3. Google Analytics</h2>
+
+    <p>
+      本网站使用 Google 提供的 Google Analytics 4（GA4）
+      获取网站使用情况的统计信息，例如了解用户使用哪些门店页面
+      以及网站功能。
+    </p>
+
+    <p>
+      Analytics 可能处理与网站互动、设备、浏览器以及访问过程
+      有关的技术信息。
+    </p>
+
+    <p>
+      在适用法律要求用户同意的情况下，
+      Google Analytics 仅在用户作出同意选择后启用。
+      用户可以拒绝或之后修改自己的选择，
+      且不会因此失去网站主要功能的使用权。
+    </p>
+
+
+    <h2>4. 语言偏好</h2>
+
+    <p>
+      本网站可以通过浏览器的 localStorage 功能，
+      在用户设备上保存所选择的语言
+      （意大利语、英语或中文）。
+    </p>
+
+    <p>
+      此信息仅用于记住用户的语言选择，
+      从而改善网站浏览体验。
+    </p>
+
+
+    <h2>5. 数据处理目的</h2>
+
+    <p>数据可能用于：</p>
+
+    <ul>
+      <li>提供网站及其基本功能；</li>
+      <li>保障网站安全及正常运行；</li>
+      <li>记住用户选择的语言；</li>
+      <li>
+        在法律允许的范围和方式内，
+        统计网站的使用情况；
+      </li>
+      <li>提供用户主动选择使用的网站功能。</li>
+    </ul>
+
+
+    <h2>6. 数据处理的法律依据</h2>
+
+    <p>
+      网站正常运行和安全所严格需要的数据处理，
+      根据具体处理活动，以提供用户所请求的服务，
+      以及数据控制者保障网站安全和正常运行的合法利益为依据。
+    </p>
+
+    <p>
+      对于法律要求取得同意的数据处理，
+      包括在适用情况下使用统计和测量技术，
+      其法律依据为用户的同意。
+    </p>
+
+
+    <h2>7. 外部链接及设备功能</h2>
+
+    <p>
+      网站包含可打开第三方服务的链接，
+      例如用于导航的 Google Maps。
+    </p>
+
+    <p>
+      只有当用户主动点击相关链接时，
+      才会进入第三方服务。
+      此后第三方服务提供商可能按照其自身的隐私政策处理数据。
+    </p>
+
+    <p>
+      拨打餐厅电话以及保存餐厅联系人的功能，
+      会调用用户设备本身提供的相应功能。
+    </p>
+
+
+    <h2>8. 数据接收方</h2>
+
+    <p>
+      在必要范围内，网站运行和管理所使用的技术服务提供商
+      可能处理相关数据；Google Analytics 启用时，
+      其服务提供商也可能处理与统计服务有关的数据。
+    </p>
+
+    <p>
+      对于欧洲用户，Google 服务可能涉及
+      Google Ireland Limited 以及 Google 集团的其他公司，
+      具体按照相应服务适用的条款和隐私说明执行。
+    </p>
+
+
+    <h2>9. 国际数据传输</h2>
+
+    <p>
+      部分服务提供商可能会在欧洲经济区（EEA）以外的国家
+      处理数据，或允许从这些国家访问相关数据。
+    </p>
+
+    <p>
+      如发生此类情况，相关处理及数据传输将按照适用的数据保护
+      法律规定及相应的数据传输机制进行。
+    </p>
+
+
+    <h2>10. 数据保存期限</h2>
+
+    <p>
+      个人数据仅在实现其收集目的所必需的期间内保存，
+      并按照网站所使用的各项服务适用的保存期限进行处理。
+    </p>
+
+    <p>
+      保存在浏览器本地的语言偏好可能持续保存在设备上，
+      直到用户或浏览器修改或删除该信息。
+    </p>
+
+
+    <h2>11. 用户的数据保护权利</h2>
+
+    <p>
+      在 GDPR 规定的适用情况下，用户可以行使访问、更正、
+      删除、限制处理、反对处理以及数据可携带等权利。
+    </p>
+
+    <p>
+      如果某项数据处理以用户同意为法律依据，
+      用户可以随时撤回同意。
+      撤回同意不会影响撤回前基于同意已经进行的数据处理的合法性。
+    </p>
+
+    <p>
+      如需行使相关权利，可以联系：
+      <a href="mailto:amministrazione.wen@gmail.com">
+        amministrazione.wen@gmail.com
+      </a>。
+    </p>
+
+
+    <h2>12. 向监管机构投诉</h2>
+
+    <p>
+      用户还有权按照适用法律，
+      向意大利个人数据保护局
+      （Garante per la protezione dei dati personali）
+      或其他有管辖权的数据保护监管机构提出投诉。
+    </p>
+
+
+    <h2>13. 隐私政策更新</h2>
+
+    <p>
+      本隐私政策可能根据法律法规、网站技术
+      或所使用服务的变化进行更新。
+    </p>
+
+  </article>
+
+
+  <footer>
+    © Sushic Italy
+  </footer>
+
+</main>
+
+
+<script>
+
+  const languages = {
+
+    it: {
+      flag: "🇮🇹",
+      name: "IT",
+      back: "‹ Torna al sito",
+      title: "Informativa Privacy",
+      updated: "Ultimo aggiornamento: 30 settembre 2026"
+    },
+
+    en: {
+      flag: "🇬🇧",
+      name: "EN",
+      back: "‹ Back to website",
+      title: "Privacy Policy",
+      updated: "Last updated: 30 September 2026"
+    },
+
+    zh: {
+      flag: "🇨🇳",
+      name: "中文",
+      back: "‹ 返回网站",
+      title: "隐私政策",
+      updated: "最后更新：2026年9月30日"
+    }
+
+  };
+
+
+  function detectLanguage() {
+
+    const browserLanguage =
+      (navigator.languages && navigator.languages[0]) ||
+      navigator.language ||
+      "it";
+
+    const language =
+      browserLanguage.toLowerCase();
+
+    if (language.startsWith("zh")) {
+      return "zh";
+    }
+
+    if (language.startsWith("en")) {
+      return "en";
+    }
+
+    return "it";
+  }
+
+
+  function applyLanguage(language) {
+
+    if (!languages[language]) {
+      language = "it";
+    }
+
+    const text = languages[language];
+
+    document.getElementById("currentFlag").textContent =
+      text.flag;
+
+    document.getElementById("currentLanguage").textContent =
+      text.name;
+
+    document.getElementById("backText").textContent =
+      text.back;
+
+    document.getElementById("pageTitle").textContent =
+      text.title;
+
+    document.getElementById("updatedText").textContent =
+      text.updated;
+
+
+    document
+      .querySelectorAll(".language-content")
+      .forEach(function(element) {
+
+        element.style.display = "none";
+
+      });
+
+
+    document.getElementById(
+      "content-" + language
+    ).style.display = "block";
+
+
+    document
+      .querySelectorAll(".language-option")
+      .forEach(function(option) {
+
+        option.classList.remove("active");
+
+      });
+
+
+    document.getElementById(
+      "option-" + language
+    ).classList.add("active");
+
+
+    document.documentElement.lang =
+      language === "zh"
+        ? "zh-CN"
+        : language;
+  }
+
+
+  function setLanguage(language) {
+
+    localStorage.setItem(
+      "sushic-language",
+      language
+    );
+
+    applyLanguage(language);
+
+    document
+      .getElementById("languageMenu")
+      .classList
+      .remove("open");
+  }
+
+
+  function toggleLanguageMenu(event) {
+
+    event.stopPropagation();
+
+    document
+      .getElementById("languageMenu")
+      .classList
+      .toggle("open");
+  }
+
+
+  document.addEventListener(
+    "click",
+    function(event) {
+
+      const menu =
+        document.getElementById("languageMenu");
+
+      if (!menu.contains(event.target)) {
+        menu.classList.remove("open");
+      }
+
+    }
+  );
+
+
+  const savedLanguage =
+    localStorage.getItem("sushic-language");
+
+  const initialLanguage =
+    savedLanguage ||
+    detectLanguage();
+
+  applyLanguage(initialLanguage);
+
+</script>
+
+</body>
+</html>
