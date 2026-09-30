@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7f5">
+
+  
+
+  <link rel="icon" href="/favicon.svg?v=10" type="image/svg+xml" sizes="any">
+  <link rel="icon" href="/favicon-32.png?v=10" type="image/png" sizes="32x32">
+<title>Sushic Cassano</title>
+<style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: #f7f7f5;
+      color: #111;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 30px 24px 50px;
+    }
+
+    /* =========================
+       语言下拉菜单
+       ========================= */
+
+    .language-menu {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      z-index: 1000;
+      text-align: left;
+    }
+
+    .language-current {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      min-width: 82px;
+      padding: 8px 10px;
+
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+
+      color: #333;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+    }
+
+    .language-current:active {
+      transform: scale(0.98);
+    }
+
+    .current-flag {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .language-arrow {
+      margin-left: 1px;
+      color: #999;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .language-menu.open .language-arrow {
+      transform: rotate(180deg);
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 7px);
+      right: 0;
+
+      width: 105px;
+      padding: 6px;
+
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+
+      box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-5px);
+
+      transition:
+        opacity 0.18s ease,
+        transform 0.18s ease,
+        visibility 0.18s ease;
+    }
+
+    .language-menu.open .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      width: 100%;
+      padding: 10px 9px;
+
+      border: 0;
+      border-radius: 8px;
+
+      background: transparent;
+      color: #333;
+
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .language-option:hover {
+      background: #f5f5f3;
+    }
+
+    .language-option.active {
+      background: #f2f2f0;
+      font-weight: 600;
+    }
+
+    .language-option .flag {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    /* =========================
+       返回
+       ========================= */
+
+    .back {
+      display: inline-block;
+      margin-bottom: 45px;
+      padding-top: 5px;
+
+      color: #777;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    /* =========================
+       LOGO
+       ========================= */
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .logo-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .logo {
+      display: block;
+      width: 180px;
+      max-width: 65%;
+      height: auto;
+    }
+
+    .location {
+      margin-top: 8px;
+      font-size: 14px;
+      letter-spacing: 4px;
+      color: #888;
+    }
+
+    /* =========================
+       营业状态
+       ========================= */
+
+    .business-hours {
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .business-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      padding: 8px 14px;
+
+      background: #ffffff;
+      border: 1px solid #e7e7e7;
+      border-radius: 20px;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      flex-shrink: 0;
+
+      border-radius: 50%;
+      background: #999;
+    }
+
+    .business-status.open .status-dot {
+      background: #28a745;
+    }
+
+    .business-status.closed .status-dot {
+      background: #d9534f;
+    }
+
+    .hours-detail {
+      margin-top: 9px;
+      color: #888;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       功能按钮
+       ========================= */
+
+    .button {
+      display: flex;
+      align-items: center;
+
+      width: 100%;
+      padding: 20px;
+      margin-bottom: 14px;
+
+      background: white;
+      color: #111;
+      text-decoration: none;
+
+      border: 1px solid #e7e7e7;
+      border-radius: 16px;
+
+      box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+    }
+
+    .icon {
+      width: 45px;
+      font-size: 25px;
+      text-align: center;
+      margin-right: 14px;
+    }
+
+    .text {
+      flex: 1;
+    }
+
+    .title {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .description {
+      font-size: 13px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .arrow {
+      color: #aaa;
+      font-size: 22px;
+    }
+
+    .button:active {
+      transform: scale(0.98);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 55px;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    /* =========================
+       Android 联系人中央提示
+       ========================= */
+
+    .contact-toast {
+      position: fixed;
+
+      top: 50%;
+      left: 50%;
+
+      width: calc(100% - 48px);
+      max-width: 420px;
+
+      background: #111;
+      color: #fff;
+
+      padding: 18px 20px;
+      border-radius: 14px;
+
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: center;
+
+      box-shadow: 0 8px 30px rgba(0,0,0,0.20);
+
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.96);
+
+      pointer-events: none;
+
+      transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+
+      z-index: 9999;
+    }
+
+    .contact-toast.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .contact-toast strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+
+    /* 选择导航 App */
+    .nav-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.34);display:none}
+    .nav-overlay.show{display:block}
+    .nav-chooser{position:fixed;left:50%;bottom:18px;z-index:10001;width:calc(100% - 28px);max-width:500px;transform:translateX(-50%) translateY(18px);background:#fff;border:1px solid #e5e5e5;border-radius:18px;padding:18px;box-shadow:0 14px 45px rgba(0,0,0,.18);opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease,visibility .2s ease}
+    .nav-chooser.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+    .nav-chooser-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:12px}
+    .nav-chooser-title{font-size:16px;font-weight:600}
+    .nav-close{border:0;background:transparent;color:#888;font:inherit;font-size:22px;line-height:1;padding:4px 6px;cursor:pointer}
+    .nav-app{display:flex;align-items:center;justify-content:space-between;width:100%;padding:15px 14px;margin-top:8px;border:1px solid #e7e7e7;border-radius:13px;background:#fff;color:#111;text-decoration:none;font-size:15px;font-weight:600;cursor:pointer}
+    .nav-app:active{transform:scale(.99)}
+    .nav-app-arrow{color:#aaa;font-size:20px}
+    .nav-chooser-note{margin:11px 2px 1px;color:#888;font-size:10.5px;line-height:1.45}
+
+
+    .social-footer{margin-top:34px;padding:0 2px 8px;text-align:center}
+    .social-title-row{display:flex;align-items:center;gap:13px;color:#333;font-size:12px;white-space:nowrap}
+    .social-title-row::before,.social-title-row::after{content:"";height:1px;flex:1;background:#d8d8d8}
+    .social-icons{display:flex;justify-content:center;align-items:center;gap:24px;padding:18px 0}
+    .social-link{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .15s ease,opacity .15s ease}
+    .social-link:active{transform:scale(.94);opacity:.75}
+    .social-link svg{width:34px;height:34px;display:block}
+    .social-bottom-line{height:1px;background:#d8d8d8;width:100%}
+    .social-copyright{margin-top:15px;color:#777;font-size:10.5px;letter-spacing:.01em}
+
+  </style>
+</head>
+
+<body>
+
+<main class="page">
+
+  <!-- 语言选择 -->
+
+  <div class="language-menu" id="languageMenu">
+
+    <button
+      class="language-current"
+      type="button"
+      onclick="toggleLanguageMenu(event)"
+      aria-label="Select language">
+
+      <span class="current-flag" id="currentFlag">🇮🇹</span>
+      <span id="currentLanguage">IT</span>
+      <span class="language-arrow">▼</span>
+
+    </button>
+
+    <div class="language-dropdown">
+
+      <button
+        class="language-option"
+        id="option-it"
+        type="button"
+        onclick="setLanguage('it')">
+        <span class="flag">🇮🇹</span>
+        <span>IT</span>
+      </button>
+
+      <button
+        class="language-option"
+        id="option-en"
+        type="button"
+        onclick="setLanguage('en')">
+        <span class="flag">🇬🇧</span>
+        <span>EN</span>
+      </button>
+
+      <button
+        class="language-option"
+        id="option-zh"
+        type="button"
+        onclick="setLanguage('zh')">
+        <span class="flag">🇨🇳</span>
+        <span>中文</span>
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- 返回首页 -->
+
+  <a
+    class="back"
+    href="index.html"
+    id="backText">
+    ‹ Scegli un altro ristorante
+  </a>
+
+  <!-- LOGO + 门店 + 营业状态 -->
+
+  <div class="header">
+
+    <div class="logo-wrap">
+      <img
+        src="sushic-logo.png"
+        alt="Sushic Asian Experience"
+        class="logo">
+    </div>
+
+    <div class="location">
+      CASSANO
+    </div>
+
+    <div class="business-hours">
+
+      <div
+        class="business-status"
+        id="businessStatus">
+
+        <span class="status-dot"></span>
+
+        <span id="businessStatusText">
+          Caricamento...
+        </span>
+
+      </div>
+
+      <div
+        class="hours-detail"
+        id="hoursDetail">
+        Tutti i giorni · 12:00–15:00 / 19:00–23:30
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- MENU -->
+
+  <a
+    class="button"
+    href="menu-cassano.html"
+    onclick="trackAction('menu_click')">
+
+    <div class="icon">🍣</div>
+
+    <div class="text">
+      <div class="title" id="menuTitle">
+        Menu
+      </div>
+
+      <div class="description" id="menuDescription">
+        Consulta i nostri menu
+      </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+  </a>
+
+  <!-- NAVIGAZIONE -->
+
+  <a
+    class="button"
+    href="#"
+    onclick="openNavigationChooser(event)">
+
+    <div class="icon">📍</div>
+
+    <div class="text">
+      <div class="title" id="navigateTitle">
+        Naviga
+      </div>
+
+      <div class="description" id="navigateDescription">
+        Indicazioni per il ristorante
+      </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+  </a>
+
+  <!-- TELEFONO -->
+
+  <a
+    class="button"
+    href="tel:+390331648325"
+    onclick="trackAction('phone_click')">
+
+    <div class="icon">☎️</div>
+
+    <div class="text">
+      <div class="title" id="callTitle">
+        Chiama
+      </div>
+
+      <div class="description" id="callDescription">
+        Contatta il ristorante
+      </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+  </a>
+
+  <!-- SALVA CONTATTO -->
+
+  <a
+    class="button"
+    href="#"
+    onclick="openContact(event)">
+
+    <div class="icon">👤</div>
+
+    <div class="text">
+      <div
+        class="title"
+        id="contactTitle">
+        Salva contatto
+      </div>
+
+      <div
+        class="description"
+        id="contactDescription">
+        Aggiungi Sushic Cassano ai contatti
+      </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+  </a>
+
+
+  <footer class="social-footer">
+    <div class="social-title-row"><span>Seguici / Follow us / 关注我们</span></div>
+    <div class="social-icons">
+      <a class="social-link" href="https://www.instagram.com/sushic_italy/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" onclick="trackAction('instagram_click')">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <defs><radialGradient id="igGradient" cx="30%" cy="105%" r="115%"><stop offset="0%" stop-color="#ffd600"/><stop offset="35%" stop-color="#ff7a00"/><stop offset="65%" stop-color="#ff0169"/><stop offset="100%" stop-color="#d300c5"/></radialGradient></defs>
+          <rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#igGradient)"/>
+          <rect x="6.2" y="6.2" width="11.6" height="11.6" rx="3.4" fill="none" stroke="#fff" stroke-width="1.7"/>
+          <circle cx="12" cy="12" r="2.9" fill="none" stroke="#fff" stroke-width="1.7"/>
+          <circle cx="16.25" cy="7.8" r="1" fill="#fff"/>
+        </svg>
+      </a>
+      <a class="social-link" href="https://www.facebook.com/sushic.asian.experience/following" target="_blank" rel="noopener noreferrer" aria-label="Facebook" onclick="trackAction('facebook_click')">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="#1877F2"/>
+          <path d="M13.55 21v-7h2.35l.35-2.73h-2.7V9.53c0-.79.22-1.33 1.35-1.33h1.44V5.76c-.25-.03-1.1-.11-2.09-.11-2.07 0-3.49 1.26-3.49 3.58v2.04H8.42V14h2.34v7h2.79z" fill="#fff"/>
+        </svg>
+      </a>
+    </div>
+    <div class="social-bottom-line"></div>
+    <div class="social-copyright">© Sushic Italy</div>
+  </footer>
+
+
+</main>
+
+<!-- Android 中央提示 -->
+
+<div
+  id="contactToast"
+  class="contact-toast">
+
+  <strong id="toastTitle">
+    ✓ Contatto pronto
+  </strong>
+
+  <span id="toastDescription">
+    Apri il file scaricato per aggiungerlo ai contatti.
+  </span>
+
+</div>
+
+
+<div id="navOverlay" class="nav-overlay" onclick="closeNavigationChooser()"></div>
+<section id="navChooser" class="nav-chooser" role="dialog" aria-modal="true" aria-labelledby="navChooserTitle">
+  <div class="nav-chooser-head">
+    <div id="navChooserTitle" class="nav-chooser-title">Apri con</div>
+    <button type="button" class="nav-close" onclick="closeNavigationChooser()" aria-label="Close">×</button>
+  </div>
+  <a id="appleMapsLink" class="nav-app" href="#"><span>Apple Maps</span><span class="nav-app-arrow">›</span></a>
+  <a id="googleMapsLink" class="nav-app" href="#"><span>Google Maps</span><span class="nav-app-arrow">›</span></a>
+  <a id="wazeLink" class="nav-app" href="#"><span>Waze</span><span class="nav-app-arrow">›</span></a>
+  <div id="navChooserNote" class="nav-chooser-note">Se l'app è installata, il telefono proverà ad aprirla direttamente.</div>
+</section>
+
+<script>
+
+  /* =========================
+     Google Analytics 4
+     仅在首页已获得 Analytics 同意后加载
+     ========================= */
+
+  const GA_MEASUREMENT_ID = "G-B30JEWQ1T8";
+  const CONSENT_KEY = "sushic-consent-v1";
+  const CONSENT_VALIDITY_MS = 1000 * 60 * 60 * 24 * 183;
+  let analyticsLoaded = false;
+
+  function getConsentChoice() {
+    try {
+      const choice =
+        JSON.parse(localStorage.getItem(CONSENT_KEY));
+
+      if (
+        !choice ||
+        typeof choice.analytics !== "boolean" ||
+        !choice.updatedAt
+      ) {
+        return null;
+      }
+
+      const savedAt =
+        new Date(choice.updatedAt).getTime();
+
+      if (
+        !Number.isFinite(savedAt) ||
+        Date.now() - savedAt >= CONSENT_VALIDITY_MS
+      ) {
+        localStorage.removeItem(CONSENT_KEY);
+        return null;
+      }
+
+      return choice;
+
+    } catch (e) {
+      localStorage.removeItem(CONSENT_KEY);
+      return null;
+    }
+  }
+
+  function hasAnalyticsConsent() {
+    return getConsentChoice()?.analytics === true;
+  }
+
+  function loadAnalytics() {
+    if (!hasAnalyticsConsent() || analyticsLoaded) {
+      return;
+    }
+
+    analyticsLoaded = true;
+
+    window.dataLayer =
+      window.dataLayer || [];
+
+    window.gtag = function() {
+      window.dataLayer.push(arguments);
+    };
+
+    window.gtag("js", new Date());
+
+    window.gtag(
+      "config",
+      GA_MEASUREMENT_ID
+    );
+
+    const script =
+      document.createElement("script");
+
+    script.async = true;
+
+    script.src =
+      "https://www.googletagmanager.com/gtag/js?id=" +
+      encodeURIComponent(GA_MEASUREMENT_ID);
+
+    document.head.appendChild(script);
+  }
+
+
+  /* =========================
+     三语言
+     ========================= */
+
+  const translations = {
+
+    it: {
+
+      back: "‹ Scegli un altro ristorante",
+
+      hours:
+        "Tutti i giorni · 12:00–15:00 / 19:00–23:30",
+
+      openUntil:
+        "Aperto · Chiude alle ",
+
+      closedUntil:
+        "Chiuso · Apre alle ",
+
+      closedToday:
+        "Chiuso · Apre oggi alle 12:00",
+
+      closedTomorrow:
+        "Chiuso · Apre domani alle 12:00",
+
+      menuTitle: "Menu",
+      menuDescription: "Consulta i nostri menu",
+
+      navigateTitle: "Naviga",
+      navigateDescription: "Indicazioni per il ristorante",
+      navChooserTitle: "Apri con",
+      navChooserNote: "Se l’app è installata, il telefono proverà ad aprirla direttamente.",
+
+      callTitle: "Chiama",
+      callDescription: "Contatta il ristorante",
+
+      contactTitle: "Salva contatto",
+      contactDescription: "Aggiungi Sushic Cassano ai contatti",
+
+      toastTitle: "✓ Contatto pronto",
+      toastDescription:
+        "Apri il file scaricato per aggiungerlo ai contatti.",
+
+      languageName: "IT",
+      flag: "🇮🇹"
+    },
+
+    en: {
+
+      back: "‹ Choose another restaurant",
+
+      hours:
+        "Every day · 12:00–15:00 / 19:00–23:30",
+
+      openUntil:
+        "Open · Closes at ",
+
+      closedUntil:
+        "Closed · Opens at ",
+
+      closedToday:
+        "Closed · Opens today at 12:00",
+
+      closedTomorrow:
+        "Closed · Opens tomorrow at 12:00",
+
+      menuTitle: "Menu",
+      menuDescription: "View our menus",
+
+      navigateTitle: "Directions",
+      navigateDescription: "Get directions to the restaurant",
+      navChooserTitle: "Open with",
+      navChooserNote: "If the app is installed, your phone will try to open it directly.",
+
+      callTitle: "Call",
+      callDescription: "Contact the restaurant",
+
+      contactTitle: "Save contact",
+      contactDescription: "Add Sushic Cassano to your contacts",
+
+      toastTitle: "✓ Contact ready",
+      toastDescription:
+        "Open the downloaded file to add it to your contacts.",
+
+      languageName: "EN",
+      flag: "🇬🇧"
+    },
+
+    zh: {
+
+      back: "‹ 选择其他餐厅",
+
+      hours:
+        "每天 · 12:00–15:00 / 19:00–23:30",
+
+      openUntil:
+        "营业中 · 营业至 ",
+
+      closedUntil:
+        "休息中 · 营业时间 ",
+
+      closedToday:
+        "休息中 · 今天 12:00 营业",
+
+      closedTomorrow:
+        "已打烊 · 明天 12:00 营业",
+
+      menuTitle: "菜单",
+      menuDescription: "查看我们的菜单",
+
+      navigateTitle: "导航",
+      navigateDescription: "前往餐厅",
+      navChooserTitle: "选择导航 App",
+      navChooserNote: "如果手机已安装该 App，将尝试直接打开。",
+
+      callTitle: "电话",
+      callDescription: "联系餐厅",
+
+      contactTitle: "保存联系人",
+      contactDescription: "将 Sushic Cassano 添加到通讯录",
+
+      toastTitle: "✓ 联系人已准备好",
+      toastDescription:
+        "打开下载的文件，将 Sushic Cassano 添加到通讯录。",
+
+      languageName: "中文",
+      flag: "🇨🇳"
+    }
+
+  };
+
+  /* =========================
+     自动检测系统语言
+     ========================= */
+
+  function detectLanguage() {
+
+    const browserLanguage =
+      (navigator.languages && navigator.languages[0]) ||
+      navigator.language ||
+      "it";
+
+    const language =
+      browserLanguage.toLowerCase();
+
+    if (language.startsWith("zh")) {
+      return "zh";
+    }
+
+    if (language.startsWith("en")) {
+      return "en";
+    }
+
+    if (language.startsWith("it")) {
+      return "it";
+    }
+
+    return "it";
+  }
+
+  /* 当前语言 */
+
+  function getCurrentLanguage() {
+
+    return (
+      localStorage.getItem("sushic-language") ||
+      detectLanguage()
+    );
+  }
+
+  /* =========================
+     GA4 点击统计
+     ========================= */
+
+  function trackAction(eventName) {
+
+    if (hasAnalyticsConsent() && typeof gtag === "function") {
+
+      gtag("event", eventName, {
+        restaurant: "cassano",
+        language: getCurrentLanguage(),
+        page_type: "restaurant"
+      });
+
+    }
+  }
+
+  /* 联系人统计 */
+
+  function trackContactSave() {
+    trackAction("contact_save");
+  }
+
+  /* =========================
+     iOS / Android 联系人自动分流
+     ========================= */
+
+  function openContact(event) {
+
+    event.preventDefault();
+
+    trackContactSave();
+
+    const userAgent =
+      navigator.userAgent || "";
+
+    const isAndroid =
+      /Android/i.test(userAgent);
+
+    const isIOS =
+      /iPad|iPhone|iPod/i.test(userAgent) ||
+      (
+        navigator.platform === "MacIntel" &&
+        navigator.maxTouchPoints > 1
+      );
+
+    /* iPhone / iPad */
+
+    if (isIOS) {
+
+      window.location.href =
+        "cassano-iOS.vcf";
+
+      return;
+    }
+
+    /* Android */
+
+    if (isAndroid) {
+
+      showContactHelp();
+
+      setTimeout(function() {
+
+        window.location.href =
+          "cassano-Android.vcf";
+
+      }, 250);
+
+      return;
+    }
+
+    /* 电脑或其他设备 */
+
+    window.location.href =
+      "cassano-Android.vcf";
+  }
+
+  /* =========================
+     打开 / 关闭语言菜单
+     ========================= */
+
+
+  /* 导航 App 选择 */
+  const navigationDestination = "Sushic Cassano, Via IV Novembre 18, 21012 Cassano Magnago VA, Italia";
+
+  function openNavigationChooser(event) {
+    if (event) event.preventDefault();
+    const destination = encodeURIComponent(navigationDestination);
+
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    const appleMapsLink = document.getElementById("appleMapsLink");
+
+    /* Android 不显示 Apple Maps */
+    appleMapsLink.style.display = isAndroid ? "none" : "flex";
+
+    if (!isAndroid) {
+      appleMapsLink.href =
+        "https://maps.apple.com/?daddr=" + destination + "&dirflg=d";
+    }
+
+    document.getElementById("googleMapsLink").href =
+      "https://www.google.com/maps/dir/?api=1&destination=" + destination;
+    document.getElementById("wazeLink").href =
+      "https://www.waze.com/ul?q=" + destination + "&navigate=yes";
+
+    document.getElementById("appleMapsLink").onclick =
+      function() { trackAction("navigation_apple_maps"); closeNavigationChooser(); };
+    document.getElementById("googleMapsLink").onclick =
+      function() { trackAction("navigation_google_maps"); closeNavigationChooser(); };
+    document.getElementById("wazeLink").onclick =
+      function() { trackAction("navigation_waze"); closeNavigationChooser(); };
+
+    trackAction("navigation_click");
+    document.getElementById("navOverlay").classList.add("show");
+    document.getElementById("navChooser").classList.add("show");
+  }
+
+  function closeNavigationChooser() {
+    document.getElementById("navOverlay").classList.remove("show");
+    document.getElementById("navChooser").classList.remove("show");
+  }
+
+  function toggleLanguageMenu(event) {
+
+    event.stopPropagation();
+
+    document
+      .getElementById("languageMenu")
+      .classList
+      .toggle("open");
+  }
+
+  /* =========================
+     应用语言
+     ========================= */
+
+  function applyLanguage(language) {
+
+    const text =
+      translations[language];
+
+    document.getElementById("backText").textContent =
+      text.back;
+
+    document.getElementById("menuTitle").textContent =
+      text.menuTitle;
+
+    document.getElementById("menuDescription").textContent =
+      text.menuDescription;
+
+    document.getElementById("navigateTitle").textContent =
+      text.navigateTitle;
+
+    document.getElementById("navigateDescription").textContent =
+      text.navigateDescription;
+
+    document.getElementById("navChooserTitle").textContent =
+      text.navChooserTitle;
+
+    document.getElementById("navChooserNote").textContent =
+      text.navChooserNote;
+
+    document.getElementById("callTitle").textContent =
+      text.callTitle;
+
+    document.getElementById("callDescription").textContent =
+      text.callDescription;
+
+    document.getElementById("contactTitle").textContent =
+      text.contactTitle;
+
+    document.getElementById("contactDescription").textContent =
+      text.contactDescription;
+
+    document.getElementById("toastTitle").textContent =
+      text.toastTitle;
+
+    document.getElementById("toastDescription").textContent =
+      text.toastDescription;
+
+    document.getElementById("currentFlag").textContent =
+      text.flag;
+
+    document.getElementById("currentLanguage").textContent =
+      text.languageName;
+
+    document.getElementById("hoursDetail").textContent =
+      text.hours;
+
+    document.documentElement.lang =
+      language === "zh"
+        ? "zh-CN"
+        : language;
+
+    document
+      .querySelectorAll(".language-option")
+      .forEach(function(option) {
+
+        option.classList.remove("active");
+
+      });
+
+    document
+      .getElementById("option-" + language)
+      .classList
+      .add("active");
+  }
+
+  /* =========================
+     手动切换语言 + GA4
+     ========================= */
+
+  function setLanguage(language) {
+
+    const previousLanguage =
+      getCurrentLanguage();
+
+    localStorage.setItem(
+      "sushic-language",
+      language
+    );
+
+    applyLanguage(language);
+
+    updateBusinessStatus();
+
+    document
+      .getElementById("languageMenu")
+      .classList
+      .remove("open");
+
+    if (
+      previousLanguage !== language &&
+      hasAnalyticsConsent() &&
+      typeof gtag === "function"
+    ) {
+
+      gtag("event", "language_change", {
+        restaurant: "cassano",
+        page_type: "restaurant",
+        language_from: previousLanguage,
+        language_to: language
+      });
+
+    }
+  }
+
+  /* 点击其他地方关闭语言菜单 */
+
+  document.addEventListener(
+    "click",
+    function(event) {
+
+      const menu =
+        document.getElementById("languageMenu");
+
+      if (!menu.contains(event.target)) {
+
+        menu.classList.remove("open");
+
+      }
+
+    }
+  );
+
+  /* =========================
+     Android 联系人中央提示
+     ========================= */
+
+  function showContactHelp() {
+
+    if (/Android/i.test(navigator.userAgent)) {
+
+      const toast =
+        document.getElementById("contactToast");
+
+      toast.classList.add("show");
+
+      setTimeout(function() {
+
+        toast.classList.remove("show");
+
+      }, 6000);
+
+    }
+  }
+
+  /* =========================
+     获取意大利 Rome 当前时间
+     ========================= */
+
+  function getRomeMinutes() {
+
+    const parts =
+      new Intl.DateTimeFormat(
+        "en-GB",
+        {
+          timeZone: "Europe/Rome",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false
+        }
+      ).formatToParts(new Date());
+
+    const hour =
+      Number(
+        parts.find(
+          function(part) {
+            return part.type === "hour";
+          }
+        ).value
+      );
+
+    const minute =
+      Number(
+        parts.find(
+          function(part) {
+            return part.type === "minute";
+          }
+        ).value
+      );
+
+    return hour * 60 + minute;
+  }
+
+  /* =========================
+     自动营业状态
+
+     每天：
+     12:00–15:00
+     19:00–23:30
+     ========================= */
+
+  function updateBusinessStatus() {
+
+    const language =
+      getCurrentLanguage();
+
+    const text =
+      translations[language];
+
+    const minutes =
+      getRomeMinutes();
+
+    const lunchOpen =
+      12 * 60;
+
+    const lunchClose =
+      15 * 60;
+
+    const dinnerOpen =
+      19 * 60;
+
+    const dinnerClose =
+      23 * 60 + 30;
+
+    const status =
+      document.getElementById("businessStatus");
+
+    const statusText =
+      document.getElementById("businessStatusText");
+
+    const hoursDetail =
+      document.getElementById("hoursDetail");
+
+    hoursDetail.textContent =
+      text.hours;
+
+    status.classList.remove(
+      "open",
+      "closed"
+    );
+
+    /* 00:00–12:00 */
+
+    if (minutes < lunchOpen) {
+
+      status.classList.add("closed");
+
+      statusText.textContent =
+        text.closedToday;
+
+      return;
+    }
+
+    /* 12:00–15:00 */
+
+    if (
+      minutes >= lunchOpen &&
+      minutes < lunchClose
+    ) {
+
+      status.classList.add("open");
+
+      statusText.textContent =
+        text.openUntil + "15:00";
+
+      return;
+    }
+
+    /* 15:00–19:00 */
+
+    if (
+      minutes >= lunchClose &&
+      minutes < dinnerOpen
+    ) {
+
+      status.classList.add("closed");
+
+      statusText.textContent =
+        text.closedUntil + "19:00";
+
+      return;
+    }
+
+    /* 19:00–23:30 */
+
+    if (
+      minutes >= dinnerOpen &&
+      minutes < dinnerClose
+    ) {
+
+      status.classList.add("open");
+
+      statusText.textContent =
+        text.openUntil + "23:30";
+
+      return;
+    }
+
+    /* 23:30–24:00 */
+
+    status.classList.add("closed");
+
+    statusText.textContent =
+      text.closedTomorrow;
+  }
+
+  loadAnalytics();
+
+  /* =========================
+     页面加载
+     ========================= */
+
+  const savedLanguage =
+    localStorage.getItem(
+      "sushic-language"
+    );
+
+  const initialLanguage =
+    savedLanguage ||
+    detectLanguage();
+
+  applyLanguage(initialLanguage);
+
+  updateBusinessStatus();
+
+  /* 每分钟自动重新判断一次 */
+
+  setInterval(
+    updateBusinessStatus,
+    60000
+  );
+
+</script>
+
+</body>
+</html>
